@@ -1,0 +1,26 @@
+{
+	"name": "sociall-cli",
+	"version": "0.0.0",
+	"license": "MIT",
+	"bin": "./build/cli.js",
+	"engines": {
+		"node": ">=8"
+	},
+	"scripts": {
+		"dev": "pastel dev",
+		"build": "pastel build",
+		"prepare": "pastel build"
+	},
+	"files": [
+		"build"
+	],
+	"dependencies": {
+		"@octokit/core": "^3.1.2",
+		"ink": "^3.0.5",
+		"ink-spinner": "^4.0.1",
+		"pastel": "^1.1.1",
+		"prop-types": "^15.7.2",
+		"react": "^16.13.1",
+		"simple-oauth2": "^4.1.0"
+	}
+}
