@@ -1,0 +1,14 @@
+{
+    "access-token": {
+        "github": ""
+    },
+    "twitter": {
+        "api-key": "",
+        "api-secret-key": "",
+        "bearer-token": "",
+        "my-token": {
+            "access-token": "",
+            "access-token-secret": ""
+        }
+    }
+}
