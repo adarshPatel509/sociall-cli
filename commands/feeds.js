@@ -2,11 +2,31 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Text} from 'ink';
 import Loader from '../utils/loader';
-import { Octokit } from "@octokit/core";
+import { octokit, twit} from '../utils/api-clients';
 
-const config = require('../config.json');
-const octokit = new Octokit({ auth: config['access-token']['github'] });
+/**
+    Fetch Latest Twitter Feeds
+ */
+const TwitterFeeds = () => {
+    const [isLoading, setLoading] = useState(true);
+    const [feeds, setFeeds] = useState({});
 
+    useEffect(() => {
+        twit.get('statuses/home_timeline', {count: 20})
+        .then(res => {
+            console.log(res.data);
+            setFeeds(res.data);
+            setLoading(false);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    });
+
+    // if(isLoading) {
+        return <Loader message=" Fetching Twitter feeds..." type="dots" />;
+    // }
+}
 
 /**
     Fetch Latest Github Feeds
@@ -28,7 +48,7 @@ const GithubFeeds = () => {
     });
 
     // if(isLoading) {
-        return <Loader message=" Fetching feeds..." type="dots" />
+        return <Loader message=" Fetching Github feeds..." type="dots" />
     // }
 }
 
@@ -36,6 +56,9 @@ const GithubFeeds = () => {
 const Feeds = ({platform}) => {
     if(platform.includes('github')) {
         return <GithubFeeds />;
+    }
+    else if(platform.includes('twitter')) {
+        return <TwitterFeeds />
     }
     return <Text>Hello, {platform} </Text>;
 };
