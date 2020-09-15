@@ -18,6 +18,7 @@
 		"@octokit/core": "^3.1.2",
 		"ink": "^3.0.5",
 		"ink-spinner": "^4.0.1",
+		"instagram-web-api": "^2.2.2",
 		"pastel": "^1.1.1",
 		"prop-types": "^15.7.2",
 		"react": "^16.13.1",

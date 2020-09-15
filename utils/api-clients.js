@@ -1,5 +1,6 @@
 import { Octokit } from "@octokit/core";
 import Twit from 'twit';
+import Instagram from 'instagram-web-api';
 
 /**
     Get config object
@@ -23,4 +24,12 @@ const twit = new Twit({
     strictSSL:            true,  
 });
 
-export {octokit, twit};
+/**
+    Instagram api client
+ */
+const ig = new Instagram({
+    username: config['instagram']['username'],
+    password: config['instagram']['password']
+});
+
+export {octokit, twit, ig};

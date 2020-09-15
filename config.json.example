@@ -10,5 +10,9 @@
             "access-token": "",
             "access-token-secret": ""
         }
+    },
+    "instagram": {
+        "username": "",
+        "password": ""
     }
 }

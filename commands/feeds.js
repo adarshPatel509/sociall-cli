@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Text} from 'ink';
 import Loader from '../utils/loader';
-import { octokit, twit} from '../utils/api-clients';
+import { octokit, twit, ig } from '../utils/api-clients';
 
 /**
     Fetch Latest Twitter Feeds
@@ -52,6 +52,36 @@ const GithubFeeds = () => {
     // }
 }
 
+/**
+    Fetch Latest Instagram Feeds
+ */
+const InstagramFeeds = () => {
+    const [isLoading, setLoading] = useState(true);
+    const [feeds, setFeeds] = useState({});
+    
+    useEffect(() => {
+        ig.login()
+        .then(() => {
+            ig.getHome()
+            .then(res => {
+                console.log(JSON.stringify(res));
+                setFeeds(res);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        }) 
+    });
+    
+    // if(isLoading) {
+        return <Loader message=" Fetching Instagram feeds..." type="dots" />
+    // }
+}
+
 /// Get Latest Feeds command
 const Feeds = ({platform}) => {
     if(platform.includes('github')) {
@@ -59,6 +89,9 @@ const Feeds = ({platform}) => {
     }
     else if(platform.includes('twitter')) {
         return <TwitterFeeds />
+    }
+    else if(platform.includes('instagram')) {
+        return <InstagramFeeds />
     }
     return <Text>Hello, {platform} </Text>;
 };
