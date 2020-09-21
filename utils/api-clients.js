@@ -1,6 +1,7 @@
 import { Octokit } from "@octokit/core";
 import Twit from 'twit';
 import Instagram from 'instagram-web-api';
+import { Facebook, FacebookApiException } from 'fb';
 
 /**
     Get config object
@@ -10,7 +11,7 @@ const config = require('../config.json');
 /**
     Github api client
  */
-const octokit = new Octokit({ auth: config['access-token']['github'] });
+const octokit = new Octokit({ auth: config['github']['access-token'] });
 
 /**
     Twitter api client
@@ -32,4 +33,13 @@ const ig = new Instagram({
     password: config['instagram']['password']
 });
 
-export {octokit, twit, ig};
+/**
+    Facebook api client
+ */
+const fb = new Facebook({
+    appId: config['facebook']['app-id'],
+    appSecret: config['facebook']['app-secret'],
+    accessToken: config['facebook']['access-token']
+});
+
+export {octokit, twit, ig, fb};

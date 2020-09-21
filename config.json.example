@@ -1,6 +1,6 @@
 {
-    "access-token": {
-        "github": ""
+    "github": {
+        "access-token": ""
     },
     "twitter": {
         "api-key": "",
@@ -14,5 +14,11 @@
     "instagram": {
         "username": "",
         "password": ""
+    },
+     "facebook": {
+        "app-id": "",
+        "app-secret": "",
+        "access-token": "",
+        "app-token": ""
     }
 }
