@@ -16,8 +16,11 @@
 	],
 	"dependencies": {
 		"@octokit/core": "^3.1.2",
+		"fb": "^2.0.0",
 		"ink": "^3.0.5",
+		"ink-select-input": "^4.1.0",
 		"ink-spinner": "^4.0.1",
+		"ink-text-input": "^4.0.1",
 		"instagram-web-api": "^2.2.2",
 		"pastel": "^1.1.1",
 		"prop-types": "^15.7.2",
