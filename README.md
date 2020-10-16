@@ -1,31 +1,46 @@
-# sociall-cli
+# Soci*all*-CLI
 
 ![sociall](./images/sociall.png)
 
-## Install
+### Tech
 
-```bash
-$ npm install sociall-cli
+* [INK](https://github.com/vadimdemedes/ink)
+* [Pastel](https://github.com/vadimdemedes/pastel)
+* [React](https://reactjs.org/)
+
+### Getting Started
+
+* Create a **/config.json** file by copying the contents of [/config.json.example](/config.json.example) and replacing the necessary fields
+* Install the dependencies and dev-dependencies and start the server.
+
+```sh
+$ npm install
+$ npm run dev
 ```
 
-
-## CLI
+### Available Commands
 
 ```
-$ sociall-cli --help
-sociall-cli
+$ sociall-cli feeds
+$ sociall-cli update
+$ sociall-cli notifications
+$ sociall-cli post
+$ sociall-cli schedule-post
+	Options:
+	 --platfrom, -pf    List of platforms
 
-Hello world command
+$ sociall-cli --help "use help command to get details of all available commands"
 
-Options:
-
-	--name  Name of the person to greet           [string]
 ```
 
+## Reporting Issues
 
-## Development
+If you think you've found a bug, or something isn't behaving the way you think it should, please raise an [issue](https://github.com/adarshPatel509/sociall-cli/issues) on GitHub.
 
-There are 2 available commands:
+## Contributing
 
-- `npm run dev` - Start development mode and recompile on change
-- `npm run build` - Build a final distributable for npm
+Read our [Contribution Guidelines](/CONTRIBUTING.md) for information on how you can help out Soci*all*-CLI.
+
+## Licensing
+
+Soci*all*-CLI is licensed under the MIT License. See [LICENSE](/LICENSE) for the full license text.
