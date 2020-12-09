@@ -9,7 +9,7 @@ const Hello = ({name}) => {
 
 Hello.propTypes = {
 	/// Name of the person to greet
-	name: PropTypes.string.isRequired
+	name: PropTypes.string
 };
 
 export default Hello;

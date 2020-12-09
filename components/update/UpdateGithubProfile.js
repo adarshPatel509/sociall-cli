@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Box } from 'ink';
+import { Text } from 'ink';
 import Loader from '../../utils/loader.js';
 import { octokit } from '../../utils/api-clients';
 

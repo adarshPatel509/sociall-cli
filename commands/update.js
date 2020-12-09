@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {Text, Box} from 'ink';
+import { Text, Box } from 'ink';
 import SelectInput from 'ink-select-input';
 import { UncontrolledTextInput } from 'ink-text-input';
 import UpdateGithubProfile from '../components/update/UpdateGithubProfile';
@@ -9,14 +9,14 @@ import UpdateTwitterProfile from '../components/update/UpdateTwitterProfile';
 
 
 /// Update Your Profile
-const UpdateProfile = ({platform}) => {
+const UpdateProfile = ({ platform }) => {
   const [updateField, setField] = useState('');
   const [newValue, setValue] = useState('');
 
   const items = [
-    {label: 'Full Name', value: 'name'},
-    {label: 'UserName', value: 'username'},
-    {label: 'Bio', value: 'bio'}
+    { label: 'Full Name', value: 'name' },
+    { label: 'UserName', value: 'username' },
+    { label: 'Bio', value: 'bio' }
   ];
 
   const handleSelect = (item) => {
@@ -24,21 +24,21 @@ const UpdateProfile = ({platform}) => {
   };
 
   const handleSubmit = (newValue) => {
-    const updateObj = {[updateField]: newValue};
+    const updateObj = { [updateField]: newValue };
     setValue(updateObj);
   }
 
-  if(updateField === '') {
+  if (updateField === '') {
     return (
       <>
-        <Box borderStyle="round" paddingLeft={1} width={41} borderColor="#00FFFF">
+        <Box borderStyle="round" paddingLeft={1} width={51} borderColor="#00FFFF">
           <Text color="yellow">Select the profile section to Update: </Text>
         </Box>
         <SelectInput items={items} onSelect={handleSelect} />
       </>
     );
-  } 
-  else if(newValue === '') {
+  }
+  else if (newValue === '') {
     return (
       <Box width="100%">
         <Box marginRight={1}>
@@ -47,9 +47,9 @@ const UpdateProfile = ({platform}) => {
         <UncontrolledTextInput onSubmit={handleSubmit} />
       </Box>
     );
-  } 
+  }
   else {
-    if(platform.includes('all')) {
+    if (platform.includes('all')) {
       return (
         <>
           <UpdateGithubProfile updateObj={newValue} />
@@ -58,17 +58,17 @@ const UpdateProfile = ({platform}) => {
         </>
       );
     }
-    if(platform.includes('github')) {
+    if (platform.includes('github')) {
       return <UpdateGithubProfile updateObj={newValue} />;
     }
-    else if(platform.includes('twitter')) {
+    else if (platform.includes('twitter')) {
       return <UpdateTwitterProfile updateObj={newValue} />;
     }
-    else if(platform.includes('instagram')) {
+    else if (platform.includes('instagram')) {
       return <UpdateInstagramProfile updateObj={newValue} />
     }
     return <Text color='red'>Please enter valid platform name!!</Text>;
-  };
+  }
 };
 
 UpdateProfile.propTypes = {
