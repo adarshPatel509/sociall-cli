@@ -20,7 +20,7 @@ const TwitterNotifications = () => {
                         user
                     } = res.data[i]
                     const { name , screen_name } = user
-                    const ans = <Box borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column">
+                    const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column">
                         <Text><Text bold >{screen_name}({name})</Text> has mentioned you({in_reply_to_screen_name}) in Tweet</Text>
                         <Text>{text} </Text>
                         <Text>-{created_at} </Text>
@@ -41,7 +41,9 @@ const TwitterNotifications = () => {
     }
     else {
         return <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width={125}>
-            {notifications.map(x => x)}
+            {notifications.map((x,index) => {
+                return x
+            })}
         </Box>
     }
 }

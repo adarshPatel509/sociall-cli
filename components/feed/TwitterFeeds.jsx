@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Text ,Box} from 'ink';
+import { Text, Box } from 'ink';
 import Loader from '../../utils/loader';
 import { twit } from "../../utils/api-clients"
 const th = require('../../themes.json')
@@ -25,13 +24,12 @@ const TwitterFeeds = () => {
                         retweet_count,
                         favorite_count,
                     } = res.data[i];
-                    text = text.slice(0,text.search("https://")-1)
-                    if(truncated)
-                    {
+                    text = text.slice(0, text.search("https://") - 1)
+                    if (truncated) {
                         text += "..."
                     }
                     const { name } = user;
-                    const ans = <Box borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column">
+                    const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column">
                         <Text><Text bold >{name}</Text> tweeted on <Text underline >{created_at}</Text> </Text>
                         <Text>{text}</Text>
                         <Text>{"\uD83D\uDD01"} Retweet : {retweet_count} {"\u2764\uFE0F"}  Favorite : {favorite_count}</Text>
@@ -44,7 +42,7 @@ const TwitterFeeds = () => {
             .catch(err => {
                 console.log(err);
             });
-    },[]);
+    }, []);
 
     if (isLoading) {
         return <Loader message=" Fetching Twitter feeds..." type="dots" />;
@@ -53,8 +51,10 @@ const TwitterFeeds = () => {
         // console.log(feeds);
         return (
             <>
-                <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width ={125}>
-                    {feeds.map(x => x)}
+                <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width={125}>
+                    {feeds.map((x, index) => {
+                        return x
+                    })}
                 </Box>
             </>
         );

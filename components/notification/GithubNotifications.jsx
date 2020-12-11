@@ -27,7 +27,7 @@ const GithubNotifications = () => {
                         owner,
                     } = repository
                     const { login } = owner
-                    const ans = <Box borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column">
+                    const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column">
                         <Text><Text bold >{login}</Text> generated <Text color={"blue"}>{feed_reply[type]["emoji"]}  {type}</Text> in {name} repo of title <Text underline>"{title}"</Text> </Text>
                         <Text>You got the Notifications because you have <Text underline>{reason}</Text></Text>
                     </Box>
@@ -46,7 +46,9 @@ const GithubNotifications = () => {
     }
     else {
         return <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width={125}>
-            {notifications.map(x => x)}
+            {notifications.map((x,index) => {
+                return x
+            })}
         </Box>
     }
 }

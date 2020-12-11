@@ -4,29 +4,32 @@ import Loader from '../../utils/loader';
 import { octokit } from "../../utils/api-clients"
 const th = require('../../themes.json')
 const feed_reply = require("../../feed_reply.json")
+const config = require('../config.json');
+
+
 const GithubFeeds = () => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
     // const [git_username, setUsername] = useState("")
 
     useEffect(() => {
-        octokit.request('/user')
-            .then(res => {
-                setUsername(res.data.login)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        // octokit.request('/user')
+        //     .then(res => {
+        //         setUsername(res.data.login)
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //     })
 
         octokit.request('GET /users/{username}/received_events', {
-            username: 'utsavk28'
+            username: config["github"]["username"]
         })
             .then(res => {
                 var arr = []
                 for (let i = 0; i < Math.min(10, res.data.length); i++) {
                     var { type, actor, repo, created_at } = res.data[i]
                     var { login } = actor, { name } = repo
-                    const ans = <Box borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" >
+                    const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" >
                         <Text><Text bold >{login}</Text> {feed_reply[type]["reply"]} <Text color="blue" underline>{name}</Text></Text>
                         <Text>Created at : {created_at}</Text>
                     </Box>
@@ -49,7 +52,9 @@ const GithubFeeds = () => {
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width={125}>
-                    {feeds.map(x => x)}
+                    {feeds.map((x, index) => {
+                        return x
+                    })}
                 </Box>
             </>
         );
