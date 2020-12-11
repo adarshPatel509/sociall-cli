@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Text} from 'ink';
 import Spinner from 'ink-spinner';
+const th = require('../themes.json')
 
 /**
     Custom Loader component

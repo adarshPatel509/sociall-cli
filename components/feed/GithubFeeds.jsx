@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
 import { Text, Box } from 'ink';
 import Loader from '../../utils/loader';
 import { octokit } from "../../utils/api-clients"
-
+const th = require('../../themes.json')
+const feed_reply = require("../../feed_reply.json")
 const GithubFeeds = () => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
-    const [git_username, setUsername] = useState("")
+    // const [git_username, setUsername] = useState("")
 
     useEffect(() => {
         octokit.request('/user')
@@ -24,11 +24,11 @@ const GithubFeeds = () => {
             .then(res => {
                 var arr = []
                 for (let i = 0; i < Math.min(10, res.data.length); i++) {
-                    const { type, actor, repo, created_at } = res.data[i]
-                    const { login } = actor, { name } = repo
-                    const data = { type: type, login: login, name: name, created_at: created_at }
-                    const ans = <Box borderStyle="round" borderColor="red" paddingLeft={2}>
-                        <Text>{login} <Text color="blue" >{type} {name}</Text> {created_at} </Text>
+                    var { type, actor, repo, created_at } = res.data[i]
+                    var { login } = actor, { name } = repo
+                    const ans = <Box borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" >
+                        <Text><Text bold >{login}</Text> {feed_reply[type]["reply"]} <Text color="blue" underline>{name}</Text></Text>
+                        <Text>Created at : {created_at}</Text>
                     </Box>
                     arr.push(ans)
                 }
@@ -39,7 +39,7 @@ const GithubFeeds = () => {
                 console.log(err);
             })
 
-    });
+    }, []);
 
     if (isLoading) {
         return <Loader message=" Fetching Github feeds..." type="dots" />
@@ -48,7 +48,7 @@ const GithubFeeds = () => {
         // console.log(feeds);
         return (
             <>
-                <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width ={125}>
+                <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width={125}>
                     {feeds.map(x => x)}
                 </Box>
             </>

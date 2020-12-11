@@ -15,6 +15,7 @@
 		"build"
 	],
 	"dependencies": {
+		"@material-ui/core": "^4.11.2",
 		"@octokit/core": "^3.1.2",
 		"fb": "^2.0.0",
 		"ink": "^3.0.5",

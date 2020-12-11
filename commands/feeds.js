@@ -6,6 +6,7 @@ import TwitterFeeds from "../components/feed/TwitterFeeds"
 import GithubFeeds from "../components/feed/GithubFeeds"
 import FacebookFeeds from "../components/feed/FacebookFeeds"
 import InstagramFeeds from "../components/feed/InstagramFeeds"
+const th = require('../themes.json')
 
 
 /// Get Latest Feeds command
@@ -41,7 +42,7 @@ const Feeds = ({ platform = "" }) => {
             return (
                 <>
                     <Box borderStyle="round" paddingLeft={1} width={51} borderColor="#00FFFF">
-                        <Text color="yellow">Select the Social Media to see feed : </Text>
+                        <Text color="yellow" >Select the Social Media to see feed : </Text>
                     </Box>
                     <SelectInput items={items} onSelect={handleSelect} />
                 </>
@@ -74,5 +75,6 @@ Feeds.propTypes = {
 Feeds.shortFlags = {
     platform: 'pf'
 };
+
 
 export default Feeds;

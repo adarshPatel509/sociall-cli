@@ -1,0 +1,41 @@
+{
+    "current": "sol_light",
+    "default": {
+        "background_color": "black",
+        "font_color": "white",
+        "main_box_border_color": "",
+        "outer_box_border_color": "#00FFFF",
+        "inner_box_border_color": "red",
+        "theme_color" : "white"
+    },
+    "sol_dark": {
+        "background_color": "black",
+        "font_color": "white",
+        "main_box_border_color": "",
+        "outer_box_border_color": "#1bafaf",
+        "inner_box_border_color": "orange",
+        "theme_color" : "white"
+    },
+    "sol_light": {
+        "background_color": "black",
+        "font_color": "black",
+        "main_box_border_color": "",
+        "outer_box_border_color": "#00FFFF",
+        "inner_box_border_color": "red",
+        "theme_color" : "black"
+    },
+    "papercolor": {
+        "background_color": "black",
+        "font_color": "white",
+        "main_box_border_color": "",
+        "outer_box_border_color": "#00FFFF",
+        "inner_box_border_color": "red"
+    },
+    "molokai": {
+        "background_color": "black",
+        "font_color": "white",
+        "main_box_border_color": "",
+        "outer_box_border_color": "#00FFFF",
+        "inner_box_border_color": "red"
+    }
+}

@@ -6,7 +6,7 @@ import { UncontrolledTextInput } from 'ink-text-input';
 import UpdateGithubProfile from '../components/update/UpdateGithubProfile';
 import UpdateInstagramProfile from '../components/update/UpdateInstagramProfile';
 import UpdateTwitterProfile from '../components/update/UpdateTwitterProfile';
-
+const th = require("../themes.json")
 
 /// Update Your Profile
 const UpdateProfile = ({ platform }) => {
@@ -31,7 +31,7 @@ const UpdateProfile = ({ platform }) => {
   if (updateField === '') {
     return (
       <>
-        <Box borderStyle="round" paddingLeft={1} width={51} borderColor="#00FFFF">
+        <Box borderStyle="round" paddingLeft={1} width={51} borderColor={th[th["current"]]["outer_box_border_color"]}>
           <Text color="yellow">Select the profile section to Update: </Text>
         </Box>
         <SelectInput items={items} onSelect={handleSelect} />

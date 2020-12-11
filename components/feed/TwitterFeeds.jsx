@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Text ,Box} from 'ink';
 import Loader from '../../utils/loader';
 import { twit } from "../../utils/api-clients"
+const th = require('../../themes.json')
 
 /**
     Fetch Latest Twitter Feeds
@@ -16,18 +17,24 @@ const TwitterFeeds = () => {
             .then(res => {
                 var arr = []
                 for (let i = 0; i < res.data.length; i++) {
-                    const {
+                    var {
                         created_at,
                         text,
+                        truncated,
                         user,
                         retweet_count,
                         favorite_count,
                     } = res.data[i];
+                    text = text.slice(0,text.search("https://")-1)
+                    if(truncated)
+                    {
+                        text += "..."
+                    }
                     const { name } = user;
                     const ans = <Box borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column">
-                        <Text>{name} tweeted on {created_at} </Text>
+                        <Text><Text bold >{name}</Text> tweeted on <Text underline >{created_at}</Text> </Text>
                         <Text>{text}</Text>
-                        <Text>Retweet Count : {retweet_count} Favorite Count : {favorite_count}</Text>
+                        <Text>{"\uD83D\uDD01"} Retweet : {retweet_count} {"\u2764\uFE0F"}  Favorite : {favorite_count}</Text>
                     </Box>
                     arr.push(ans)
                 }
@@ -37,7 +44,7 @@ const TwitterFeeds = () => {
             .catch(err => {
                 console.log(err);
             });
-    });
+    },[]);
 
     if (isLoading) {
         return <Loader message=" Fetching Twitter feeds..." type="dots" />;

@@ -2,7 +2,6 @@ import { Octokit } from "@octokit/core";
 import Twit from 'twit';
 import Instagram from 'instagram-web-api';
 import { Facebook } from 'fb';
-
 /**
     Get config object
  */

@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Text } from 'ink';
 import Loader from '../../utils/loader';
 import { fb } from "../../utils/api-clients"
+const th = require('../../themes.json')
 
 const FacebookFeeds = () => {
     const [isLoading, setLoading] = useState(true);
-    const [feeds, setFeeds] = useState({});
+    const [feeds, setFeeds] = useState([]);
     
     useEffect(() => {
         fb.api('/me/feed', 'POST', {'message': "YEyy!!"}, (res) => {
@@ -16,7 +17,7 @@ const FacebookFeeds = () => {
                 console.log(res);
             }
         })
-    });
+    },[]);
     
     // if(isLoading) {
         return <Loader message=" Fetching Facebook feeds..." type="dots" />
