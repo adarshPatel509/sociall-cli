@@ -12,7 +12,7 @@ const th = require('../../themes.json')
 const TwitterFeeds = () => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
-    // const [xyz,setX] = useState([])
+    const [xyz,setX] = useState([])
     useEffect(() => {
         twit.get('statuses/home_timeline', { count: 10 })
             .then(res => {
@@ -38,8 +38,8 @@ const TwitterFeeds = () => {
                         <Text>{"\uD83D\uDD01"} Retweet : {retweet_count} {"\u2764\uFE0F"}  Favorite : {favorite_count}</Text>
                     </Box>
                     arr.push(ans)
-                    // if(i <2)
-                    // setX(res.data[i].entities)
+                    if(i <2)
+                    setX(res.data[i])
                 }
                 setFeeds(arr);
                 setLoading(false)
@@ -54,13 +54,13 @@ const TwitterFeeds = () => {
     }
     else {
         // console.log(feeds);
-        // console.log(xyz)
+        console.log(xyz)
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignItems="center">
-                    {feeds.map((x, index) => {
+                    {/* {feeds.map((x, index) => {
                         return x
-                    })}
+                    })} */}
                 </Box>
             </>
         );
