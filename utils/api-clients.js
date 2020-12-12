@@ -2,6 +2,7 @@ import { Octokit } from "@octokit/core";
 import Twit from 'twit';
 import Instagram from 'instagram-web-api';
 import { Facebook } from 'fb';
+import Reddit from "reddit"
 /**
     Get config object
  */
@@ -40,4 +41,12 @@ const fb = new Facebook({
     accessToken: config['facebook']['access-token']
 });
 
-export { octokit, twit, ig, fb };
+const reddit = new Reddit({
+    username: config['reddit']['username'],
+    password: config['reddit']['password'],
+    appId: config['reddit']['appId'],
+    appSecret: config['reddit']['appSecret'],
+    userAgent: config['reddit']['userAgent']
+})
+
+export { octokit, twit, ig, fb, reddit };

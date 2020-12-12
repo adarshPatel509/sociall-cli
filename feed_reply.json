@@ -64,5 +64,8 @@
     },
     "PullRequest": {
         "emoji": "\uD83D\uDCD6"
+    },
+    "RepositoryVulnerabilityAlert": {
+        "emoji": "\u26A0\uFE0F"
     }
 }

@@ -6,6 +6,7 @@ import TwitterFeeds from "../components/feed/TwitterFeeds"
 import GithubFeeds from "../components/feed/GithubFeeds"
 import FacebookFeeds from "../components/feed/FacebookFeeds"
 import InstagramFeeds from "../components/feed/InstagramFeeds"
+import RedditFeeds from "../components/feed/RedditFeeds"
 const th = require('../themes.json')
 
 
@@ -25,13 +26,17 @@ const Feeds = ({ platform = "" }) => {
     else if (platform.includes('facebook')) {
         return <FacebookFeeds />;
     }
+    else if (platform.includes('reddit')) {
+        return <RedditFeeds />;
+    }
     else {
         const [updateField, setField] = useState('');
         const items = [
             { label: 'Github', value: 'github' },
             { label: 'Twitter', value: 'twitter' },
             { label: 'Facebook', value: 'facebook' },
-            { label: 'Instagram', value: 'instagram' }
+            { label: 'Instagram', value: 'instagram' },
+            { label: 'Reddit', value: 'reddit' }
         ];
 
         const handleSelect = (item) => {
@@ -60,6 +65,9 @@ const Feeds = ({ platform = "" }) => {
             }
             else if (updateField == 'facebook') {
                 return <FacebookFeeds />
+            }
+            else if (updateField == 'reddit') {
+                return <RedditFeeds />
             }
         }
 

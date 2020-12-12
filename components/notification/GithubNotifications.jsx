@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, Box } from 'ink';
 import Loader from '../../utils/loader';
 import { octokit } from "../../utils/api-clients"
+import DateFormatter from "../../utils/date-formatter"
 const th = require('../../themes.json')
 const feed_reply = require("../../feed_reply.json")
 const GithubNotifications = () => {
@@ -27,7 +28,7 @@ const GithubNotifications = () => {
                         owner,
                     } = repository
                     const { login } = owner
-                    const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column">
+                    const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" width="90%" alignSelf="center">
                         <Text><Text bold >{login}</Text> generated <Text color={"blue"}>{feed_reply[type]["emoji"]}  {type}</Text> in {name} repo of title <Text underline>"{title}"</Text> </Text>
                         <Text>You got the Notifications because you have <Text underline>{reason}</Text></Text>
                     </Box>
@@ -45,7 +46,7 @@ const GithubNotifications = () => {
         return <Loader message=" Fetching Notifications..." type="dots" />
     }
     else {
-        return <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width={125}>
+        return <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignItems="center">
             {notifications.map((x,index) => {
                 return x
             })}

@@ -19,13 +19,17 @@
 		"@octokit/core": "^3.1.2",
 		"fb": "^2.0.0",
 		"ink": "^3.0.5",
+		"ink-link": "^2.0.0",
 		"ink-select-input": "^4.1.0",
 		"ink-spinner": "^4.0.1",
 		"ink-text-input": "^4.0.1",
 		"instagram-web-api": "^2.2.2",
+		"javascript-time-ago": "^2.3.3",
+		"node-fetch": "^2.6.1",
 		"pastel": "^1.1.1",
 		"prop-types": "^15.7.2",
 		"react": "^16.13.1",
+		"reddit": "^1.2.1",
 		"twit": "^2.2.11"
 	}
 }
