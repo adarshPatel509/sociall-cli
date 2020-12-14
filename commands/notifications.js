@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {Text,Box} from 'ink';
+import { Text, Box } from 'ink';
 import SelectInput from 'ink-select-input';
 import GithubNotifications from "../components/notification/GithubNotifications"
 import TwitterNotifications from "../components/notification/TwitterNotifications"
+import RedditNotifications from "../components/notification/RedditNotifications"
 const th = require('../themes.json')
 
 /// Get Latest Notification command
-const Notifications = ({platform = ""}) => {
+const Notifications = ({ platform = "" }) => {
     if (platform.includes('github')) {
         return <GithubNotifications />;
     }
@@ -20,6 +21,9 @@ const Notifications = ({platform = ""}) => {
     // else if (platform.includes('facebook')) {
     //     return <FacebookNotificationss />;
     // }
+    else if (platform.includes('twitter')) {
+        return <TwitterNotifications />;
+    }
     else {
         const [updateField, setField] = useState('');
         const items = [
@@ -65,8 +69,8 @@ const Notifications = ({platform = ""}) => {
 
 
 Notifications.propTypes = {
-	/// Name of the Platform to fetch Notifications
-	platform: PropTypes.string
+    /// Name of the Platform to fetch Notifications
+    platform: PropTypes.string
 };
 
 Notifications.shortFlags = {
