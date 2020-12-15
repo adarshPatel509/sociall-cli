@@ -12,7 +12,6 @@ const fetch = require("node-fetch");
 const GithubFeeds = () => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
-    const [xyz,setxyz] = useState([])
 
     useEffect(() => {
         octokit.request('GET /users/{username}/received_events', {
@@ -47,8 +46,6 @@ const GithubFeeds = () => {
     }
     else {
         // console.log(feeds);
-        console.log(xyz)
-        console.log("\n\n\n\n\n\n")
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">

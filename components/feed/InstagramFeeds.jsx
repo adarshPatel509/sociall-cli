@@ -4,26 +4,23 @@ import { Text } from 'ink';
 import Loader from '../../utils/loader';
 import { ig } from "../../utils/api-clients"
 const th = require('../../themes.json')
+const config = require('../../config');
 
 const InstagramFeeds = () => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState({});
 
-    useEffect(() => {
-        ig.login()
-        .then(() => {
-            ig.getHome()
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        })
-        .catch(err => {
-            console.log(err);
-        }) 
-
+    useEffect( () => {
+        (async () => {
+            try {
+                const auth = await ig.account.login(config['instagram']['username'], config['instagram']['password']);
+                const timeline = ig.feed.timeline(auth.pk);
+                const items = await timeline.items();
+                console.log(items);
+            } catch {
+                console.log("error")
+            }
+        })();
     }, []);
 
     // if(isLoading) {
