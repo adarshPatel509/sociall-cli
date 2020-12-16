@@ -4,6 +4,7 @@ import { Text, Box } from 'ink';
 import SelectInput from 'ink-select-input';
 import GithubUnFollow from "../../components/manageUsers/unfollow/GithubUnFollow"
 import TwitterUnFollow from "../../components/manageUsers/unfollow/TwitterUnFollow"
+import RedditUnFollow from "../../components/manageUsers/unfollow/RedditUnFollow"
 const th = require('../../themes.json')
 
 
@@ -23,9 +24,9 @@ const UnFollow = ({ platform = "" ,username}) => {
     // else if (platform.includes('facebook')) {
     //     return <FacebookFeeds />;
     // }
-    // else if (platform.includes('reddit')) {
-    //     return <RedditFeeds />;
-    // }
+    else if (platform.includes('reddit')) {
+        return <RedditUnFollow username = {username} />;
+    }
     else {
         const [updateField, setField] = useState('');
         const items = [
@@ -63,9 +64,9 @@ const UnFollow = ({ platform = "" ,username}) => {
             // else if (updateField == 'facebook') {
             //     return <FacebookFeeds />
             // }
-            // else if (updateField == 'reddit') {
-            //     return <RedditFeeds />
-            // }
+            else if (updateField == 'reddit') {
+                return <RedditUnFollow username = {username} />
+            }
         }
 
     }

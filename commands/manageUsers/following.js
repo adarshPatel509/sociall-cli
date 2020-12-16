@@ -4,6 +4,7 @@ import { Text, Box } from 'ink';
 import SelectInput from 'ink-select-input';
 import GithubFollowing from "../../components/manageUsers/following/GithubFollowing"
 import TwitterFollowing from "../../components/manageUsers/following/TwitterFollowing"
+import RedditFollowing from "../../components/manageUsers/following/RedditFollowing"
 const th = require('../../themes.json')
 
 
@@ -23,9 +24,9 @@ const Following = ({ platform = "" }) => {
     // else if (platform.includes('facebook')) {
     //     return <FacebookFeeds />;
     // }
-    // else if (platform.includes('reddit')) {
-    //     return <RedditFeeds />;
-    // }
+    else if (platform.includes('reddit')) {
+        return <RedditFollowing />;
+    }
     else {
         const [updateField, setField] = useState('');
         const items = [
@@ -63,9 +64,9 @@ const Following = ({ platform = "" }) => {
             // else if (updateField == 'facebook') {
             //     return <FacebookFeeds />
             // }
-            // else if (updateField == 'reddit') {
-            //     return <RedditFeeds />
-            // }
+            else if (updateField == 'reddit') {
+                return <RedditFollowing />
+            }
         }
 
     }
