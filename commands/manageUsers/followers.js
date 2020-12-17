@@ -5,6 +5,7 @@ import SelectInput from 'ink-select-input';
 import GithubFollowers from "../../components/manageUsers/followers/GithubFollowers"
 import TwitterFollowers from "../../components/manageUsers/followers/TwitterFollowers"
 import RedditFollowers from "../../components/manageUsers/followers/RedditFollowers"
+import InstagramFollowers from "../../components/manageUsers/followers/InstagramFollowers"
 const th = require('../../themes.json')
 
 
@@ -18,9 +19,9 @@ const Followers = ({ platform = "" }) => {
     else if (platform.includes('twitter')) {
         return <TwitterFollowers />;
     }
-    // else if (platform.includes('instagram')) {
-    //     return <InstagramFeeds />;
-    // }
+    else if (platform.includes('instagram')) {
+        return <InstagramFollowers />;
+    }
     // else if (platform.includes('facebook')) {
     //     return <FacebookFeeds />;
     // }
@@ -55,9 +56,9 @@ const Followers = ({ platform = "" }) => {
             if (updateField == 'github') {
                 return <GithubFollowers />;
             }
-            // else if (updateField == 'instagram') {
-            //     return <InstagramFeeds />;
-            // }
+            else if (updateField == 'instagram') {
+                return <InstagramFollowers />;
+            }
             else if (updateField == 'twitter') {
                 return <TwitterFollowers />
             }

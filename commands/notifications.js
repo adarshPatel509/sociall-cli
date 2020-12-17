@@ -5,6 +5,7 @@ import SelectInput from 'ink-select-input';
 import GithubNotifications from "../components/notification/GithubNotifications"
 import TwitterNotifications from "../components/notification/TwitterNotifications"
 import RedditNotifications from "../components/notification/RedditNotifications"
+import InstagramNotifications from "../components/notification/InstagramNotifications"
 const th = require('../themes.json')
 
 /// Get Latest Notification command
@@ -15,9 +16,9 @@ const Notifications = ({ platform = "" }) => {
     else if (platform.includes('twitter')) {
         return <TwitterNotifications />;
     }
-    // else if (platform.includes('instagram')) {
-    //     return <InstagramNotifications />;
-    // }
+    else if (platform.includes('instagram')) {
+        return <InstagramNotifications />;
+    }
     // else if (platform.includes('facebook')) {
     //     return <FacebookNotificationss />;
     // }
@@ -51,9 +52,9 @@ const Notifications = ({ platform = "" }) => {
             if (updateField == 'github') {
                 return <GithubNotifications />;
             }
-            // else if (updateField == 'instagram') {
-            //     return <InstagramNotifications />;
-            // }
+            else if (updateField == 'instagram') {
+                return <InstagramNotifications />;
+            }
             else if (updateField == 'twitter') {
                 return <TwitterNotifications />
             }

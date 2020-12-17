@@ -5,6 +5,7 @@ import SelectInput from 'ink-select-input';
 import GithubFollowing from "../../components/manageUsers/following/GithubFollowing"
 import TwitterFollowing from "../../components/manageUsers/following/TwitterFollowing"
 import RedditFollowing from "../../components/manageUsers/following/RedditFollowing"
+import InstagramFollowing from "../../components/manageUsers/following/InstagramFollowing"
 const th = require('../../themes.json')
 
 
@@ -18,9 +19,9 @@ const Following = ({ platform = "" }) => {
     else if (platform.includes('twitter')) {
         return <TwitterFollowing />;
     }
-    // else if (platform.includes('instagram')) {
-    //     return <InstagramFeeds />;
-    // }
+    else if (platform.includes('instagram')) {
+        return <InstagramFollowing />;
+    }
     // else if (platform.includes('facebook')) {
     //     return <FacebookFeeds />;
     // }
@@ -45,7 +46,7 @@ const Following = ({ platform = "" }) => {
             return (
                 <>
                     <Box borderStyle="round" paddingLeft={1} width={51} borderColor="#00FFFF">
-                        <Text color="yellow" >Select the Social Media to see followers : </Text>
+                        <Text color="yellow" >Select the Social Media to see following : </Text>
                     </Box>
                     <SelectInput items={items} onSelect={handleSelect} />
                 </>
@@ -55,9 +56,9 @@ const Following = ({ platform = "" }) => {
             if (updateField == 'github') {
                 return <GithubFollowing />;
             }
-            // else if (updateField == 'instagram') {
-            //     return <InstagramFeeds />;
-            // }
+            else if (updateField == 'instagram') {
+                return <InstagramFollowing />;
+            }
             else if (updateField == 'twitter') {
                 return <TwitterFollowing />
             }
