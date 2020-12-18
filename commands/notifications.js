@@ -22,6 +22,9 @@ const Notifications = ({ platform = "" }) => {
     // else if (platform.includes('facebook')) {
     //     return <FacebookNotificationss />;
     // }
+    else if (platform.includes('reddit')) {
+        return <RedditNotifications />;
+    }
     else if (platform.includes('twitter')) {
         return <TwitterNotifications />;
     }
@@ -31,7 +34,8 @@ const Notifications = ({ platform = "" }) => {
             { label: 'Github', value: 'github' },
             { label: 'Twitter', value: 'twitter' },
             { label: 'Facebook', value: 'facebook' },
-            { label: 'Instagram', value: 'instagram' }
+            { label: 'Instagram', value: 'instagram' },
+            { label: 'Reddit', value: 'reddit' }
         ];
 
         const handleSelect = (item) => {
@@ -57,6 +61,9 @@ const Notifications = ({ platform = "" }) => {
             }
             else if (updateField == 'twitter') {
                 return <TwitterNotifications />
+            }
+            else if (platform.includes('reddit')) {
+                return <https://github.com/dilame/instagram-private-api/blob/master/docs/classes/_repositories_upload_repository_.uploadrepository.md />;
             }
             // else if (updateField == 'facebook') {
             //     return <FacebookNotificationss />
