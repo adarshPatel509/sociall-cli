@@ -15,7 +15,8 @@ const UpdateProfile = ({ platform }) => {
   const items = [
     { label: 'Full Name', value: 'name' },
     { label: 'UserName', value: 'username' },
-    { label: 'Bio', value: 'bio' }
+    { label: 'Bio', value: 'bio' },
+    { label : "Profile Photo" , value : 'profile_photo'}
   ];
 
   const handleSelect = (item) => {
@@ -30,7 +31,7 @@ const UpdateProfile = ({ platform }) => {
   if (updateField === '') {
     return (
       <>
-        <Box borderStyle="round" paddingLeft={1} width={51} borderColor={th[th["current"]]["outer_box_border_color"]}>
+        <Box borderStyle="round" paddingLeft={1} width={51} borderColor="#00FFFF">
           <Text color="yellow">Select the profile section to Update: </Text>
         </Box>
         <SelectInput items={items} onSelect={handleSelect} />

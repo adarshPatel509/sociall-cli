@@ -12,17 +12,31 @@ const UpdateTwitterProfile = (props) => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    if(props.updateObj.bio) {
-        props.updateObj['description'] = props.updateObj.bio;
-        delete props.updateObj.bio;
+    if(Object.keys(props.updateObj)[0] == "profile_photo")
+    {
+        twit.post('account/update_profile_image',props.updateObj.profile_photo)
+        .then(res => {
+          console.log(res);
+          setLoading(false)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
-    twit.post('account/update_profile', props.updateObj)
-    .then(res => {
-      setLoading(false);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    else
+    {
+      if(props.updateObj.bio) {
+          props.updateObj['description'] = props.updateObj.bio;
+          delete props.updateObj.bio;
+      }
+      twit.post('account/update_profile', props.updateObj)
+      .then(res => {
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
   }, []);
    
   if(isLoading) {

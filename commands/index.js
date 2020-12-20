@@ -4,7 +4,7 @@ import {Text} from 'ink';
 
 /// Greet command
 const Hello = ({name}) => {
-  return <Text>Hello, {name} </Text>;
+	return <Text>Hello , {name}</Text>
 };
 
 Hello.propTypes = {
