@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Box } from 'ink';
-import Link from 'ink-link';
-import { UncontrolledTextInput } from 'ink-text-input';
 import Loader from '../../utils/loader';
-import { ig } from "../../utils/api-clients"
-import InstagramPost from "./InstagramPost"
+import { UncontrolledTextInput } from 'ink-text-input';
 
 const InstagramPostData = () => {
     const [postData,setPostData] = useState({

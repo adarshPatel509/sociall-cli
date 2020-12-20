@@ -6,7 +6,6 @@ import { UncontrolledTextInput } from 'ink-text-input';
 import UpdateGithubProfile from '../components/update/UpdateGithubProfile';
 import UpdateInstagramProfile from '../components/update/UpdateInstagramProfile';
 import UpdateTwitterProfile from '../components/update/UpdateTwitterProfile';
-const th = require("../themes.json")
 
 /// Update Your Profile
 const UpdateProfile = ({ platform }) => {

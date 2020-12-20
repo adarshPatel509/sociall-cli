@@ -7,7 +7,6 @@ import GithubFeeds from "../components/feed/GithubFeeds"
 import FacebookFeeds from "../components/feed/FacebookFeeds"
 import InstagramFeeds from "../components/feed/InstagramFeeds"
 import RedditFeeds from "../components/feed/RedditFeeds"
-// const th = require('../themes.json')
 
 
 /// Get Latest Feeds command

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Text, Box } from 'ink';
 import Loader from '../../utils/loader.js';
 import { twit } from '../../utils/api-clients';
-const th = require('../../themes.json')
 
 
 /** 

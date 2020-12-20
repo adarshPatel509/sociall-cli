@@ -3,8 +3,6 @@ import { Text, Box } from 'ink';
 import Loader from '../../utils/loader';
 import { reddit } from "../../utils/api-clients"
 import DateFormatter from "../../utils/date-formatter"
-const th = require('../../themes.json')
-const feed_reply = require("../../feed_reply.json")
 
 const RedditNotifications = () => {
     const [isLoading, setLoading] = useState(true);

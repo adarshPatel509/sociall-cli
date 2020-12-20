@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Box } from 'ink';
+import { Text, Box, useInput } from 'ink';
 import Link from 'ink-link';
 import Loader from '../../../utils/loader';
 import { reddit } from "../../../utils/api-clients"
-const th = require('../../../themes.json')
-// const feed_reply = require("../../feed_reply.json")
-const config = require("../../../config.json")
-const fetch = require("node-fetch");
 
 const GithubFollowing = () => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
+    const [pg,setPg] = useState(1)
 
     useEffect(() => {
         reddit.get('/subreddits/mine/subscriber')
@@ -42,6 +39,23 @@ const GithubFollowing = () => {
             })
 
     }, []);
+
+    useInput((input,key) => {
+        const temp = feeds.length%10 ? parseInt(feeds.length/10)+1 : parseInt(feeds.length/10)
+
+        if(input === "q" || input === "Q")
+        {
+            process.exit()
+        }
+        else if(key.leftArrow)
+        {
+            setPg(Math.max(1,pg-1))
+        }
+        else if(key.rightArrow)
+        {
+            setPg(Math.min(pg+1,temp))
+        }
+    })
     
     if (isLoading) {
         return <Loader message=" Fetching Reddit Following ..." type="dots" />
@@ -50,10 +64,11 @@ const GithubFollowing = () => {
         // console.0(feeds);
         return (
             <>
-                <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">
-                    {feeds.map((x, index) => {
+               <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">
+                    {feeds.slice((pg-1)*10,(pg*10)).map((x, index) => {
                         return x
                     })}
+                    <Text>Page : {pg}</Text>
                 </Box>
             </>
         );

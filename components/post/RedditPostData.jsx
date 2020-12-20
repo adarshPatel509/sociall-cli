@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Box } from 'ink';
-import Link from 'ink-link';
 import { UncontrolledTextInput } from 'ink-text-input';
-import Loader from '../../utils/loader';
-import { reddit } from "../../utils/api-clients"
-const feed_reply = require("../../feed_reply.json")
 import RedditPost from "./RedditPost"
 
 const RedditPostData = () => {

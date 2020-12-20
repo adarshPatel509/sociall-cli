@@ -3,8 +3,7 @@ import { Text, Box } from 'ink';
 import Link from 'ink-link';
 import Loader from '../../utils/loader';
 import { octokit } from "../../utils/api-clients"
-const feed_reply = require("../../feed_reply.json")
-const config = require("../../config.json")
+
 
 const GithubPost = (props) => {
     const [isLoading, setLoading] = useState(true);

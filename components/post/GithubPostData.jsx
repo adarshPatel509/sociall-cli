@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Box } from 'ink';
-import Link from 'ink-link';
 import { UncontrolledTextInput } from 'ink-text-input';
-import Loader from '../../utils/loader';
-import { octokit } from "../../utils/api-clients"
 import GithubPost from "./GithubPost"
 
 const GithubPostData = () => {

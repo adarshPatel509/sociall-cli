@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Box } from 'ink';
-import Link from 'ink-link';
 import Loader from '../../utils/loader';
 import { reddit } from "../../utils/api-clients"
-const feed_reply = require("../../feed_reply.json")
 
 
 const RedditPost = (props) => {

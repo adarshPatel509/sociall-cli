@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Text } from 'ink';
 import Loader from '../../utils/loader';
 import { fb } from "../../utils/api-clients"
-const th = require('../../themes.json')
 
 const FacebookFeeds = () => {
     const [isLoading, setLoading] = useState(true);

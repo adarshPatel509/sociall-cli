@@ -3,9 +3,8 @@ import { Text, Box } from 'ink';
 import Loader from '../../utils/loader';
 import { ig } from "../../utils/api-clients"
 import DateFormatter from "../../utils/date-formatter"
-const th = require('../../themes.json')
 const config = require("../../config.json")
-const feed_reply = require("../../feed_reply.json")
+
 
 const InstagramNotifications = () => {
     const [isLoading, setLoading] = useState(true);

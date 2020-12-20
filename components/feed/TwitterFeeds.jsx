@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Box } from 'ink';
+import { Text, Box, useInput } from 'ink';
 import Link from 'ink-link';
 import DateFormatter from "../../utils/date-formatter"
 import Loader from '../../utils/loader';
 import { twit } from "../../utils/api-clients"
-const th = require('../../themes.json')
 
 /**
     Fetch Latest Twitter Feeds
@@ -12,8 +11,11 @@ const th = require('../../themes.json')
 const TwitterFeeds = () => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
+    const [pg,setPg] = useState(1)
+
+
     useEffect(() => {
-        twit.get('statuses/home_timeline', { count: 10 })
+        twit.get('statuses/home_timeline')
             .then(res => {
                 var arr = []
                 for (let i = 0; i < res.data.length; i++) {
@@ -46,6 +48,23 @@ const TwitterFeeds = () => {
             });
     }, []);
 
+    useInput((input,key) => {
+        const temp = feeds.length%10 ? parseInt(feeds.length/10)+1 : parseInt(feeds.length/10)
+
+        if(input === "q" || input === "Q")
+        {
+            process.exit()
+        }
+        else if(key.leftArrow)
+        {
+            setPg(Math.max(1,pg-1))
+        }
+        else if(key.rightArrow)
+        {
+            setPg(Math.min(pg+1,temp))
+        }
+    })
+
     if (isLoading) {
         return <Loader message=" Fetching Twitter feeds..." type="dots" />;
     }
@@ -54,9 +73,10 @@ const TwitterFeeds = () => {
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignItems="center">
-                    {feeds.map((x, index) => {
+                    {feeds.slice((pg-1)*10,(pg*10)).map((x, index) => {
                         return x
                     })}
+                    <Text>Page : {pg}</Text>
                 </Box>
             </>
         );

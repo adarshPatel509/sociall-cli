@@ -3,7 +3,6 @@ import { Text, Box } from 'ink';
 import Loader from '../../utils/loader';
 import { twit } from "../../utils/api-clients"
 import DateFormatter from "../../utils/date-formatter"
-const th = require('../../themes.json')
 
 const TwitterNotifications = () => {
     const [isLoading, setLoading] = useState(true);

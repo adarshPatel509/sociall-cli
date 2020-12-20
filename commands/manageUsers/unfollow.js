@@ -5,7 +5,6 @@ import SelectInput from 'ink-select-input';
 import GithubUnFollow from "../../components/manageUsers/unfollow/GithubUnFollow"
 import TwitterUnFollow from "../../components/manageUsers/unfollow/TwitterUnFollow"
 import RedditUnFollow from "../../components/manageUsers/unfollow/RedditUnFollow"
-const th = require('../../themes.json')
 
 
 /// Get Latest Feeds command

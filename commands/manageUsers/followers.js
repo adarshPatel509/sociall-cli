@@ -6,7 +6,6 @@ import GithubFollowers from "../../components/manageUsers/followers/GithubFollow
 import TwitterFollowers from "../../components/manageUsers/followers/TwitterFollowers"
 import RedditFollowers from "../../components/manageUsers/followers/RedditFollowers"
 import InstagramFollowers from "../../components/manageUsers/followers/InstagramFollowers"
-const th = require('../../themes.json')
 
 
 /// Get Latest Feeds command

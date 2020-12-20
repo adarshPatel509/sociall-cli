@@ -6,7 +6,6 @@ import GithubNotifications from "../components/notification/GithubNotifications"
 import TwitterNotifications from "../components/notification/TwitterNotifications"
 import RedditNotifications from "../components/notification/RedditNotifications"
 import InstagramNotifications from "../components/notification/InstagramNotifications"
-const th = require('../themes.json')
 
 /// Get Latest Notification command
 const Notifications = ({ platform = "" }) => {
@@ -63,7 +62,7 @@ const Notifications = ({ platform = "" }) => {
                 return <TwitterNotifications />
             }
             else if (platform.includes('reddit')) {
-                return <https://github.com/dilame/instagram-private-api/blob/master/docs/classes/_repositories_upload_repository_.uploadrepository.md />;
+                return <RedditNotifications />;
             }
             // else if (updateField == 'facebook') {
             //     return <FacebookNotificationss />

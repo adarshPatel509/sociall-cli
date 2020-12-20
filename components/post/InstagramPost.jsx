@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, Box } from 'ink';
 import Link from 'ink-link';
 import Loader from '../../utils/loader';
-import { octokit } from "../../utils/api-clients"
-const ig = require("../../feed_reply.json")
+import { ig } from "../../utils/api-clients"
 const config = require("../../config.json")
 
 const InstagramPost = (props) => {
