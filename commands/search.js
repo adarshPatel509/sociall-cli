@@ -5,7 +5,7 @@ import SelectInput from 'ink-select-input';
 import TwitterSearch from "../components/search/TwitterSearch"
 import GithubSearch from "../components/search/GithubSearch"
 // import FacebookFeeds from "../components/feed/FacebookFeeds"
-// import InstagramFeeds from "../components/feed/InstagramFeeds"
+import InstagramSearch from "../components/search/InstagramSearch"
 import RedditSearch from "../components/search/RedditSearch"
 
 
@@ -19,9 +19,9 @@ const Search = ({ platform = "" }) => {
     else if (platform.includes('twitter')) {
         return <TwitterSearch />;
     }
-    // else if (platform.includes('instagram')) {
-    //     return <InstagramFeeds />;
-    // }
+    else if (platform.includes('instagram')) {
+        return <InstagramSearch />;
+    }
     // else if (platform.includes('facebook')) {
     //     return <FacebookFeeds />;
     // }
@@ -56,9 +56,9 @@ const Search = ({ platform = "" }) => {
             if (updateField == 'github') {
                 return <GithubSearch />;
             }
-            // else if (updateField == 'instagram') {
-            //     return <InstagramFeeds />;
-            // }
+            else if (updateField == 'instagram') {
+                return <InstagramSearch />;
+            }
             else if (updateField == 'twitter') {
                 return <TwitterSearch />
             }
@@ -77,12 +77,12 @@ const Search = ({ platform = "" }) => {
 Search.propTypes = {
     /// Name of the Platform to fetch Feeds
     platform: PropTypes.string,
-    search_field:PropTypes.string
+    // search_field:PropTypes.string
 };
 
 Search.shortFlags = {
     platform: 'pf',
-    search_field:'sf'
+    // search_field:'sf'
 };
 
 
