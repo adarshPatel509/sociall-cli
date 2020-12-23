@@ -9,7 +9,7 @@ const FacebookFeeds = () => {
     const [feeds, setFeeds] = useState([]);
     
     useEffect(() => {
-        fb.api('/me/feed', 'POST', {'message': "YEyy!!"}, (res) => {
+        fb.api('/me/feed', 'GET', (res) => {
             if(!res || res.error) {
                 console.log("error!", res);
             } else {

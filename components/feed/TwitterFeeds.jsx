@@ -21,6 +21,7 @@ const TwitterFeeds = () => {
                 var arr = []
                 for (let i = 0; i < res.data.length; i++) {
                     var {
+                        id,
                         created_at,
                         text,
                         truncated,
@@ -33,10 +34,11 @@ const TwitterFeeds = () => {
                     if (truncated) {
                         text += "..."
                     }
-                    const { name } = user;
+                    const { name } = user,url="https://twitter.com/beccidee17/status/"+id;
                     const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" width="90%" alignSelf="center">
                         <Text><Text bold >{name}</Text> tweeted <Text underline >{created_at}</Text> </Text>
                         <Text>{text}</Text>
+                        <Text>Tweet Link : {url}</Text>
                         <Text>{"\uD83D\uDD01"} Retweet : {retweet_count} {"\u2764\uFE0F"}  Favorite : {favorite_count}</Text>
                     </Box>
                     arr.push(ans)
