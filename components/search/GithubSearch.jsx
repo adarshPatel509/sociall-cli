@@ -7,14 +7,14 @@ import DateFormatter from "../../utils/date-formatter"
 const feed_reply = require("../../feed_reply.json")
 const config = require("../../config.json")
 
-const GithubSearch = () => {
+const GithubSearch = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
     const [pg, setPg] = useState(1)
 
     useEffect(() => {
         octokit.request('GET /search/repositories', {
-            q: "python"
+            q: props.searchField
         })
             .then(res => {
                 var arr = []

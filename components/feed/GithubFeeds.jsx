@@ -42,7 +42,7 @@ const GithubFeeds = () => {
 
 
     useInput((input,key) => {
-        const temp = feeds.length%10 ? parseInt(feeds.length/10)+1 : parseInt(feeds.length/10)
+        const temp = feeds.length%5 ? parseInt(feeds.length/5)+1 : parseInt(feeds.length/5)
 
         if(input === "q" || input === "Q")
         {
@@ -62,11 +62,11 @@ const GithubFeeds = () => {
         return <Loader message=" Fetching Github feeds..." type="dots" />
     }
     else {
-        // console.log(feeds);
+        // console.log(feeds.data);
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">
-                    {feeds.slice((pg-1)*10,(pg*10)).map((x, index) => {
+                    {feeds.slice((pg-1)*5,(pg*5)).map((x, index) => {
                         return x
                     })}
                     <Text>Page : {pg}</Text>

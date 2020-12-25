@@ -10,23 +10,22 @@ import RedditSearch from "../components/search/RedditSearch"
 
 
 /// Get Latest Feeds command
-const Search = ({ platform = "" }) => {
-
+const Search = ({ platform = "",searchField="Test"}) => {
 
     if (platform.includes('github')) {
-        return <GithubSearch />;
+        return <GithubSearch searchField={searchField} />;
     }
     else if (platform.includes('twitter')) {
-        return <TwitterSearch />;
+        return <TwitterSearch searchField={searchField} />;
     }
     else if (platform.includes('instagram')) {
-        return <InstagramSearch />;
+        return <InstagramSearch searchField={searchField} />;
     }
     // else if (platform.includes('facebook')) {
     //     return <FacebookFeeds />;
     // }
     else if (platform.includes('reddit')) {
-        return <RedditSearch />;
+        return <RedditSearch searchField={searchField} />;
     }
     else {
         const [updateField, setField] = useState('');
@@ -54,19 +53,19 @@ const Search = ({ platform = "" }) => {
         }
         else {
             if (updateField == 'github') {
-                return <GithubSearch />;
+                return <GithubSearch searchField={searchField} />;
             }
             else if (updateField == 'instagram') {
-                return <InstagramSearch />;
+                return <InstagramSearch searchField={searchField} />;
             }
             else if (updateField == 'twitter') {
-                return <TwitterSearch />
+                return <TwitterSearch searchField={searchField} />
             }
             // else if (updateField == 'facebook') {
             //     return <FacebookFeeds />
             // }
             else if (updateField == 'reddit') {
-                return <RedditSearch />
+                return <RedditSearch searchField={searchField} />
             }
         }
 
@@ -77,12 +76,12 @@ const Search = ({ platform = "" }) => {
 Search.propTypes = {
     /// Name of the Platform to fetch Feeds
     platform: PropTypes.string,
-    // search_field:PropTypes.string
+    searchField:PropTypes.string.isRequired
 };
 
 Search.shortFlags = {
     platform: 'pf',
-    // search_field:'sf'
+    searchField:'sf'
 };
 
 

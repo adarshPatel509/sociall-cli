@@ -42,7 +42,7 @@ const UpdateTwitterProfile = (props) => {
   if(isLoading) {
     return <Loader message=" Updating Twitter Profile..." type="dots" />;
   }
-  return <Text>Twitter Profile Updated!!</Text>;
+  return <Text color="greenBright">Twitter Profile Updated!!</Text>;
 }
 
 export default UpdateTwitterProfile;

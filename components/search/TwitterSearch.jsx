@@ -7,13 +7,13 @@ import DateFormatter from "../../utils/date-formatter"
 const feed_reply = require("../../feed_reply.json")
 const config = require("../../config.json")
 
-const TwitterSearch = () => {
+const TwitterSearch = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
     const [pg, setPg] = useState(1)
 
     useEffect(() => {
-        twit.get('search/tweets', { q: "Elon Musk" })
+        twit.get('search/tweets', { q: props.searchField })
             .then(res => {
                 var arr = []
                 for (let i = 0; i < res.data.statuses.length; i++) {
@@ -84,3 +84,4 @@ const TwitterSearch = () => {
 
 
 export default TwitterSearch
+

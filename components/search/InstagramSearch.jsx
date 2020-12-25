@@ -5,7 +5,7 @@ import Loader from '../../utils/loader';
 import { ig } from "../../utils/api-clients"
 const config = require('../../config');
 
-const InstagramSearch = () => {
+const InstagramSearch = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState({});
     const [pg, setPg] = useState(1)
@@ -14,7 +14,7 @@ const InstagramSearch = () => {
         (async () => {
             try {
                 const auth = await ig.account.login(config['instagram']['username'], config['instagram']['password']);
-                const search_result = ig.user.search("Utsav")
+                const search_result = ig.user.search(props.searchField)
                 const items = await search_result
                 var arr = []
                 for (let i = 0; i < items.users.length; i++) {

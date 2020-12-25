@@ -24,7 +24,7 @@ const UpdateGithubProfile = (props) => {
   if(isLoading) {
     return <Loader message=" Updating Github Profile..." type="dots" />;
   }
-  return <Text>Github Profile Updated!!</Text>
+  return <Text color="greenBright">Github Profile Updated!!</Text>
 }
 
 export default UpdateGithubProfile;

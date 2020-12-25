@@ -5,13 +5,13 @@ import Loader from '../../utils/loader';
 import { reddit } from "../../utils/api-clients"
 
 
-const RedditSearch = () => {
+const RedditSearch = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
     const [pg,setPg] = useState(1)
 
     useEffect(() => {
-        reddit.get('/r/subreddit/search' ,{q:"anime"})
+        reddit.get('/r/subreddit/search' ,{q:props.search_field})
             .then(res => {
                 var arr = []
                 for (let i = 0; i < res.data.children.length; i++) {
