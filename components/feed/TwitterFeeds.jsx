@@ -127,11 +127,11 @@ const LikeRetweet = (props) => {
         setActiveTab(name);
     }
 
-    return (
+    return (    
         <>
             {   isFocused ?
                 <Tabs onChange={handleTabChange}>
-                    <Tab name="retweet">{"\uD83D\uDD01"} {activeTab} Retweet : {props.rtc}</Tab>
+                    <Tab name="retweet">{"\uD83D\uDD01"}  Retweet : {props.rtc}</Tab>
                     <Tab name="like">{"\u2764\uFE0F"}  Favorite : {props.fvc}</Tab>
                 </Tabs> :
                 <Text>{props.rt ? "\uD83D\uDD01" : "\u25B6\uFE0F"}  Retweet : {props.rtc} {props.fv ? "\u2764\uFE0F" : "\uD83E\uDD0D"}  Favorite : {props.fvc}</Text>

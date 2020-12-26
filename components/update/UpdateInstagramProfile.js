@@ -3,6 +3,7 @@ import { Text, Box } from 'ink';
 import Loader from '../../utils/loader.js';
 import { ig } from '../../utils/api-clients';
 import { string } from 'prop-types';
+import { createReadStream } from 'fs';
 const config = require('../../config');
 
 
@@ -21,25 +22,32 @@ const UpdateInstagramProfile = (props) => {
         const { external_url, gender, phone_number, username, first_name, email, biography } = user
         var key = Object.keys(props.updateObj)[0];
         var fkey = key
-        if (key == "name") {
-          key = "first_name"
+        if (key == "profile_photo") {
+          const rStream = createReadStream('Land_of_Runes.png')
+          const items = await ig.account.changeProfilePicture(rStream);
         }
-        else if (key == "bio") {
-          key = "biography"
+        else {
+          if (key == "name") {
+            key = "first_name"
+          }
+          else if (key == "bio") {
+            key = "biography"
+          }
+          const items = await ig.account.editProfile({
+            external_url: external_url,
+            gender: gender,
+            phone_number: phone_number,
+            username: username,
+            first_name: first_name,
+            biography: biography,
+            email: email,
+            [key]: props.updateObj[fkey]
+          });
         }
-        const items = await ig.account.editProfile({
-          external_url: external_url,
-          gender: gender,
-          phone_number: phone_number,
-          username: username,
-          first_name: first_name,
-          biography: biography,
-          email: email,
-          [key]: props.updateObj[fkey]
-        });
         setLoading(false)
       } catch (e) {
-        setErr(true);
+        setErr(false);
+        console.log(e);
       }
     })();
   }, []);

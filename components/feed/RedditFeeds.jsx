@@ -5,6 +5,7 @@ import { Tabs, Tab } from 'ink-tab';
 import Link from 'ink-link';
 import Loader from '../../utils/loader';
 import { reddit } from "../../utils/api-clients"
+import { func } from 'prop-types';
 
 
 const RedditFeeds = () => {
@@ -86,16 +87,39 @@ const LikeComment = (props) => {
 
     const upvote = () => {
         reddit.post("/api/vote", {
-            dir:1,
+            dir: 1,
             id: props.id
         })
     }
 
     const downvote = () => {
         reddit.post("/api/vote", {
-            dir:-1,
+            dir: -1,
             id: props.id
         })
+    }
+
+    const comment = () => {
+        const [comment, setComment] = useState("")
+
+        function handleSubmit(newValue) {
+            setComment(newValue)
+        }
+
+        if (comment == "") {
+            return (
+                <Box width="100%">
+                    <Box marginRight={1} flexDirection="column">
+                        <Text>Enter Comment :</Text>
+                    </Box>
+                    <UncontrolledTextInput onSubmit={handleSubmit} />
+                </Box>
+            );
+        }
+        else
+        {
+            return comment
+        }
     }
 
 
@@ -108,12 +132,19 @@ const LikeComment = (props) => {
             downvote()
             // console.log("Done!!");
         }
+        else if (activeTab == "num_comments" && btnPressed) {
+            var x = comment()
+            if(typeof x === String)
+            {
+                console.log("Comment!!!");
+            }
+        }
         if (btnPressed) {
             SetBtnPressed(false)
         }
     });
 
-    useInput((input, key) => {
+    useInput((input, key) => {  
         if (input === "s" || input === "S") {
             SetBtnPressed(true)
         }

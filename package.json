@@ -18,6 +18,7 @@
 		"@material-ui/core": "^4.11.2",
 		"@octokit/core": "^3.1.2",
 		"fb": "^2.0.0",
+		"fs": "0.0.1-security",
 		"ink": "^3.0.5",
 		"ink-link": "^2.0.0",
 		"ink-select-input": "^4.1.0",
