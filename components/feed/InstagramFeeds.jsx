@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Box, useInput, useFocus } from 'ink';
 import { Tabs, Tab } from 'ink-tab';
-
+import { UncontrolledTextInput } from 'ink-text-input';
 import Link from 'ink-link';
 import Loader from '../../utils/loader';
 import { ig } from "../../utils/api-clients"
@@ -20,7 +20,7 @@ const InstagramFeeds = () => {
                 const items = await timeline.items();
                 var arr = []
                 for (let i = 0; i < items.length; i++) {
-                    var { id,taken_at, code, location, user, comment_count, like_count, caption } = items[i], text = "", loc_name = ""
+                    var { id, taken_at, code, location, user, comment_count, like_count, caption } = items[i], text = "", loc_name = ""
                     //   const text = caption.text
                     var { username, full_name } = user
                     var user_url = "https://www.instagram.com/" + username, post_url = "https://www.instagram.com/p/" + code
@@ -70,13 +70,14 @@ const InstagramFeeds = () => {
     else {
         // console.log(feeds);
         return (
-            <>
+            <>{
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">
                     {feeds.slice((pg - 1) * 5, (pg * 5)).map((x, index) => {
                         return x
                     })}
                     <Text>Page : {pg}</Text>
                 </Box>
+            }
             </>
         );
     }
@@ -87,15 +88,9 @@ const LikeComment = (props) => {
     const [activeTab, setActiveTab] = useState(null);
     const { isFocused } = useFocus();
     const [btnPressed, SetBtnPressed] = useState(false)
+    const [comment, setComment] = useState('');
 
     const like = () => {
-        // process.exit()
-
-        // twit.post("favorites/create", {
-        //     name: "",
-        //     id: props.id
-        // })
-        console.log(props.id);
         ig.media.like({
             mediaId: props.id,
             d: 1,
@@ -103,11 +98,28 @@ const LikeComment = (props) => {
         })
     }
 
-    const retweet = () => {
-        // twit.post("statuses/retweet/:id", {
-        //     name: "",
-        //     id: props.id
-        // })
+    const commentfun = () => {
+
+
+        const handleSubmit = (x) => {
+            setComment(x);
+        }
+
+        if (comment === '') {
+            return (
+                <Box width="100%">
+                    <Box marginRight={1}>
+                        <Text>Enter Comment:</Text>
+                    </Box>
+                    <UncontrolledTextInput onSubmit={handleSubmit} />
+                </Box>
+            );
+        }
+        else {
+            const sendcomment = comment
+            setComment('');
+            return sendcomment
+        }
 
     }
 
@@ -115,10 +127,10 @@ const LikeComment = (props) => {
     useEffect(() => {
         if (activeTab == "like_count" && btnPressed) {
             like()
-            console.log("Done!!");
         }
-        else if (activeTab == "retweet" && btnPressed) {
-            retweet()
+        else if (activeTab == "comment_count" && btnPressed) {
+            commentfun()
+            console.log("Done!!!");
         }
         if (btnPressed) {
             SetBtnPressed(false)
@@ -148,5 +160,6 @@ const LikeComment = (props) => {
     )
 
 }
+
 
 export default InstagramFeeds
