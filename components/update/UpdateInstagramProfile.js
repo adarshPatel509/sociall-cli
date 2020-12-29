@@ -3,9 +3,11 @@ import { Text, Box } from 'ink';
 import Loader from '../../utils/loader.js';
 import { ig } from '../../utils/api-clients';
 import { string } from 'prop-types';
-import { createReadStream } from 'fs';
+import { createReadStream, readFile } from 'fs';
 const config = require('../../config');
-
+const promisify = require('util.promisify');
+const fs = require('fs')
+const readFileAsync = promisify(readFile);
 
 /**
     Update Instagram Profile
@@ -23,8 +25,9 @@ const UpdateInstagramProfile = (props) => {
         var key = Object.keys(props.updateObj)[0];
         var fkey = key
         if (key == "profile_photo") {
-          const rStream = createReadStream('Land_of_Runes.png')
-          const items = await ig.account.changeProfilePicture(rStream);
+          const path = props.updateObj[fkey]
+          const imageUpload = await ig.account.changeProfilePicture(await readFileAsync(path))
+          // console.log(imageUpload);
         }
         else {
           if (key == "name") {

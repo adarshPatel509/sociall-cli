@@ -83,12 +83,40 @@ const InstagramFeeds = () => {
     }
 }
 
+const CommentBox = (props) => {
+    const [comment, setComment] = useState('');
+
+    const handleSubmit = (x) => {
+        setComment(x);
+    }
+
+    useEffect(() => {
+        if (comment != "") {
+            console.log("comment", comment);
+            //make comment api calls
+            ig.media.comment({
+                mediaId: props.id,
+                text:comment
+            })
+            props.setBtnPressed(false);
+        }
+    });
+
+    return (
+        <Box width="100%">
+            <Box marginRight={1}>
+                <Text>Enter Comment:</Text>
+            </Box>
+            <UncontrolledTextInput onSubmit={handleSubmit} />
+        </Box>
+    );
+}
+
 
 const LikeComment = (props) => {
     const [activeTab, setActiveTab] = useState(null);
     const { isFocused } = useFocus();
     const [btnPressed, SetBtnPressed] = useState(false)
-    const [comment, setComment] = useState('');
 
     const like = () => {
         ig.media.like({
@@ -96,43 +124,12 @@ const LikeComment = (props) => {
             d: 1,
             moduleInfo: { module_name: 'profile' },
         })
+        
     }
-
-    const commentfun = () => {
-
-
-        const handleSubmit = (x) => {
-            setComment(x);
-        }
-
-        if (comment === '') {
-            return (
-                <Box width="100%">
-                    <Box marginRight={1}>
-                        <Text>Enter Comment:</Text>
-                    </Box>
-                    <UncontrolledTextInput onSubmit={handleSubmit} />
-                </Box>
-            );
-        }
-        else {
-            const sendcomment = comment
-            setComment('');
-            return sendcomment
-        }
-
-    }
-
 
     useEffect(() => {
         if (activeTab == "like_count" && btnPressed) {
             like()
-        }
-        else if (activeTab == "comment_count" && btnPressed) {
-            commentfun()
-            console.log("Done!!!");
-        }
-        if (btnPressed) {
             SetBtnPressed(false)
         }
     });
@@ -156,10 +153,12 @@ const LikeComment = (props) => {
                 </Tabs> :
                 <Text>{"\u2764\uFE0F"} : {props.lc} {"\uD83D\uDCAC"} : {props.cc}</Text>
             }
+            {
+                isFocused && activeTab === "comment_count" && btnPressed ? <CommentBox setBtnPressed={SetBtnPressed} id={props.id} /> : <></>
+            }
         </>
     )
 
 }
-
 
 export default InstagramFeeds

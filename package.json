@@ -35,7 +35,8 @@
 		"re2": "^1.15.9",
 		"react": "^16.13.1",
 		"reddit": "^1.2.1",
-		"twit": "^2.2.11"
+		"twit": "^2.2.11",
+		"util.promisify": "^1.0.1"
 	},
 	"devDependencies": {
 		"prettier": "2.2.1"

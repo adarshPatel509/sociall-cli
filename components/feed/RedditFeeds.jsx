@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Box, useInput, useFocus } from 'ink';
 import { Tabs, Tab } from 'ink-tab';
-
+import { UncontrolledTextInput } from 'ink-text-input';
 import Link from 'ink-link';
 import Loader from '../../utils/loader';
 import { reddit } from "../../utils/api-clients"
-import { func } from 'prop-types';
 
 
 const RedditFeeds = () => {
@@ -80,47 +79,61 @@ const RedditFeeds = () => {
 }
 
 
+const CommentBox = (props) => {
+    const [comment, setComment] = useState('');
+
+    const handleSubmit = (x) => {
+        setComment(x);
+    }
+
+    useEffect(() => {
+        if (comment != "") {
+            console.log("comment", comment);
+            //make comment api calls
+            reddit.post('/api/comment', {
+                thing_id: props.id,
+                text: comment
+            })
+            props.setBtnPressed(false);
+        }
+    });
+
+    return (
+        <Box width="100%">
+            <Box marginRight={1}>
+                <Text>Enter Comment:</Text>
+            </Box>
+            <UncontrolledTextInput onSubmit={handleSubmit} />
+        </Box>
+    );
+}
+
+
 const LikeComment = (props) => {
     const [activeTab, setActiveTab] = useState(null);
     const { isFocused } = useFocus();
     const [btnPressed, SetBtnPressed] = useState(false)
 
     const upvote = () => {
+        SetBtnPressed(false)
+
         reddit.post("/api/vote", {
             dir: 1,
             id: props.id
         })
+
     }
 
     const downvote = () => {
+        SetBtnPressed(false)
+
         reddit.post("/api/vote", {
             dir: -1,
             id: props.id
         })
+
     }
 
-    const comment = () => {
-        const [comment, setComment] = useState("")
-
-        function handleSubmit(newValue) {
-            setComment(newValue)
-        }
-
-        if (comment == "") {
-            return (
-                <Box width="100%">
-                    <Box marginRight={1} flexDirection="column">
-                        <Text>Enter Comment :</Text>
-                    </Box>
-                    <UncontrolledTextInput onSubmit={handleSubmit} />
-                </Box>
-            );
-        }
-        else
-        {
-            return comment
-        }
-    }
 
 
     useEffect(() => {
@@ -132,19 +145,9 @@ const LikeComment = (props) => {
             downvote()
             // console.log("Done!!");
         }
-        else if (activeTab == "num_comments" && btnPressed) {
-            var x = comment()
-            if(typeof x === String)
-            {
-                console.log("Comment!!!");
-            }
-        }
-        if (btnPressed) {
-            SetBtnPressed(false)
-        }
     });
 
-    useInput((input, key) => {  
+    useInput((input, key) => {
         if (input === "s" || input === "S") {
             SetBtnPressed(true)
         }
@@ -164,6 +167,9 @@ const LikeComment = (props) => {
                     <Tab name="num_comments">{"\uD83D\uDCAC"} : {props.nc}</Tab>
                 </Tabs> :
                 <Text>{"\uD83D\uDD3C"} : {props.ups} {"\uD83D\uDD3D"} : {props.downs} {"\uD83C\uDFC6"} : {props.tar} {"\uD83D\uDCAC"} : {props.nc}</Text>
+            }
+            {
+                isFocused && activeTab === "num_comments" && btnPressed ? <CommentBox setBtnPressed={SetBtnPressed} id={props.id} /> : <></>
             }
         </>
     )

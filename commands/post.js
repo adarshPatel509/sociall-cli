@@ -5,7 +5,7 @@ import SelectInput from 'ink-select-input';
 import TwitterPostData from "../components/post/TwitterPostData"
 import GithubPostData from "../components/post/GithubPostData"
 // import FacebookFeeds from "../components/feed/FacebookFeeds"
-// import InstagramFeeds from "../components/feed/InstagramFeeds"
+import InstagramPostData from "../components/post/InstagramPostData"
 import RedditPostData from "../components/post/RedditPostData"
 
 
@@ -19,9 +19,9 @@ const Post = ({ platform = "" }) => {
     else if (platform.includes('twitter')) {
         return <TwitterPostData />;
     }
-    // else if (platform.includes('instagram')) {
-    //     return <InstagramFeeds />;
-    // }
+    else if (platform.includes('instagram')) {
+        return <InstagramPostData />;
+    }
     // else if (platform.includes('facebook')) {
     //     return <FacebookFeeds />;
     // }
@@ -56,9 +56,9 @@ const Post = ({ platform = "" }) => {
             if (updateField == 'github') {
                 return <GithubPostData />;
             }
-            // else if (updateField == 'instagram') {
-            //     return <InstagramFeeds />;
-            // }
+            else if (updateField == 'instagram') {
+                return <InstagramPostData />;
+            }
             else if (updateField == 'twitter') {
                 return <TwitterPostData />
             }

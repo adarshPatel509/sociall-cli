@@ -6,7 +6,7 @@ import { UncontrolledTextInput } from 'ink-text-input';
 import UpdateGithubProfile from '../components/update/UpdateGithubProfile';
 import UpdateInstagramProfile from '../components/update/UpdateInstagramProfile';
 import UpdateTwitterProfile from '../components/update/UpdateTwitterProfile';
-
+import UpdateRedditProfile from "../components/update/UpdateRedditProfile"
 /// Update Your Profile
 const UpdateProfile = ({ platform }) => {
   const [updateField, setField] = useState('');
@@ -16,7 +16,7 @@ const UpdateProfile = ({ platform }) => {
     { label: 'Full Name', value: 'name' },
     { label: 'UserName', value: 'username' },
     { label: 'Bio', value: 'bio' },
-    { label : "Profile Photo" , value : 'profile_photo'}
+    { label: "Profile Photo", value: 'profile_photo' }
   ];
 
   const handleSelect = (item) => {
@@ -55,6 +55,8 @@ const UpdateProfile = ({ platform }) => {
           <UpdateGithubProfile updateObj={newValue} />
           <UpdateTwitterProfile updateObj={newValue} />
           <UpdateInstagramProfile updateObj={newValue} />
+          <UpdateRedditProfile updateObj={newValue} />
+
         </>
       );
     }
@@ -66,6 +68,9 @@ const UpdateProfile = ({ platform }) => {
     }
     else if (platform.includes('instagram')) {
       return <UpdateInstagramProfile updateObj={newValue} />
+    }
+    else if (platform.includes('reddit')) {
+      return <UpdateRedditProfile updateObj={newValue} />
     }
     return <Text color='red'>Please enter valid platform name!!</Text>;
   }
