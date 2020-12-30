@@ -1,48 +1,80 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {Text} from 'ink';
-import Loader from '../utils/loader';
-import { Octokit } from "@octokit/core";
-
-const config = require('../config.json');
-const octokit = new Octokit({ auth: config['access-token']['github'] });
-
-
-/**
-    Fetch Latest Github Notifications
- */
-const GithubNotifications = () => {
-    const [isLoading, setLoading] = useState(true);
-    const [feeds, setFeeds] = useState({});
-
-    useEffect(() => {
-        octokit.request('GET /notifications')
-        .then(res => {
-            console.log(res.data);
-            setFeeds(res.data);
-            setLoading(false);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    });
-
-    // if(isLoading) {
-        return <Loader message=" Fetching Notifications..." type="dots" />
-    // }
-}
+import { Text, Box } from 'ink';
+import SelectInput from 'ink-select-input';
+import GithubNotifications from "../components/notification/GithubNotifications"
+import TwitterNotifications from "../components/notification/TwitterNotifications"
+import InstagramNotifications from "../components/notification/InstagramNotifications"
+import RedditNotifications from "../components/notification/RedditNotifications"
 
 /// Get Latest Notification command
-const Notifications = ({platform}) => {
-    if(platform.includes('github')) {
+const Notifications = ({ platform = "" }) => {
+    if (platform.includes('github')) {
         return <GithubNotifications />;
     }
-    return <Text>Hello, {platform} </Text>;
+    else if (platform.includes('twitter')) {
+        return <TwitterNotifications />;
+    }
+    else if (platform.includes('instagram')) {
+        return <InstagramNotifications />;
+    }
+    // else if (platform.includes('facebook')) {
+    //     return <FacebookNotificationss />;
+    // }
+    else if (platform.includes('reddit')) {
+        return <RedditNotifications />;
+    }
+    else {
+        const [updateField, setField] = useState('');
+        const items = [
+            { label: 'Github', value: 'github' },
+            { label: 'Twitter', value: 'twitter' },
+            { label: 'Facebook', value: 'facebook' },
+            { label: 'Instagram', value: 'instagram' },
+            { label: 'Reddit', value: 'reddit' }
+        ];
+
+        const handleSelect = (item) => {
+            setField(item.value);
+        };
+
+        if (updateField === '') {
+            return (
+                <>
+                    <Box borderStyle="round" paddingLeft={1} width={51} borderColor="#00FFFF">
+                        <Text color="yellow" >Select the Social Media to see Notifications : </Text>
+                    </Box>
+                    <SelectInput items={items} onSelect={handleSelect} />
+                </>
+            );
+        }
+        else {
+            if (updateField == 'github') {
+                return <GithubNotifications />;
+            }
+            else if (updateField == 'instagram') {
+                return <InstagramNotifications />;
+            }
+            else if (updateField == 'twitter') {
+                return <TwitterNotifications />
+            }
+            else if (platform.includes('reddit')) {
+                return <RedditNotifications />;
+            }
+            // else if (updateField == 'facebook') {
+            //     return <FacebookNotificationss />
+            // }
+        }
+
+    }
+    // return <Text>Hello, {platform} </Text>;
 };
 
+
+
 Notifications.propTypes = {
-	/// Name of the Platform to fetch Notifications
-	platform: PropTypes.string.isRequired
+    /// Name of the Platform to fetch Notifications
+    platform: PropTypes.string
 };
 
 Notifications.shortFlags = {
@@ -50,3 +82,4 @@ Notifications.shortFlags = {
 };
 
 export default Notifications;
+
