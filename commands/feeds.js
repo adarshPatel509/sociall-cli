@@ -1,133 +1,87 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {Text} from 'ink';
-import Loader from '../utils/loader';
-import { octokit, twit, ig, fb } from '../utils/api-clients';
+import { Text, Box } from 'ink';
+import SelectInput from 'ink-select-input';
+import TwitterFeeds from "../components/feed/TwitterFeeds"
+import GithubFeeds from "../components/feed/GithubFeeds"
+import FacebookFeeds from "../components/feed/FacebookFeeds"
+import InstagramFeeds from "../components/feed/InstagramFeeds"
+import RedditFeeds from "../components/feed/RedditFeeds"
 
-/**
-    Fetch Latest Twitter Feeds
- */
-const TwitterFeeds = () => {
-    const [isLoading, setLoading] = useState(true);
-    const [feeds, setFeeds] = useState({});
-
-    useEffect(() => {
-        twit.get('statuses/home_timeline', {count: 20})
-        .then(res => {
-            console.log(res.data);
-            setFeeds(res.data);
-            setLoading(false);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    });
-
-    // if(isLoading) {
-        return <Loader message=" Fetching Twitter feeds..." type="dots" />;
-    // }
-}
-
-/**
-    Fetch Latest Github Feeds
- */
-const GithubFeeds = () => {
-    const [isLoading, setLoading] = useState(true);
-    const [feeds, setFeeds] = useState({});
-
-    useEffect(() => {
-        octokit.request('GET /events')  /* GET /feeds --> to get feeds */
-        .then(res => {
-            console.log(res.data);
-            setFeeds(res.data);
-            setLoading(false);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    });
-
-    // if(isLoading) {
-        return <Loader message=" Fetching Github feeds..." type="dots" />
-    // }
-}
-
-/**
-    Fetch Latest Instagram Feeds
- */
-const InstagramFeeds = () => {
-    const [isLoading, setLoading] = useState(true);
-    const [feeds, setFeeds] = useState({});
-    
-    useEffect(() => {
-        ig.login()
-        .then(() => {
-            ig.getHome()
-            .then(res => {
-                console.log(JSON.stringify(res));
-                setFeeds(res);
-                setLoading(false);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        })
-        .catch(err => {
-            console.log(err);
-        }) 
-    });
-    
-    // if(isLoading) {
-        return <Loader message=" Fetching Instagram feeds..." type="dots" />
-    // }
-}
-
-/**
-    Fetch Latest Facebook Feeds
- */
-const FacebookFeeds = () => {
-    const [isLoading, setLoading] = useState(true);
-    const [feeds, setFeeds] = useState({});
-    
-    useEffect(() => {
-        fb.api('/me/feed', 'POST', {'message': "YEyy!!"}, (res) => {
-            if(!res || res.error) {
-                console.log("error!", res);
-            } else {
-                console.log(res);
-            }
-        })
-    });
-    
-    // if(isLoading) {
-        return <Loader message=" Fetching Facebook feeds..." type="dots" />
-    // }
-}
 
 /// Get Latest Feeds command
-const Feeds = ({platform}) => {
-    if(platform.includes('github')) {
+const Feeds = ({ platform = "" }) => {
+
+
+    if (platform.includes('github')) {
         return <GithubFeeds />;
     }
-    else if(platform.includes('twitter')) {
+    else if (platform.includes('twitter')) {
         return <TwitterFeeds />;
     }
-    else if(platform.includes('instagram')) {
+    else if (platform.includes('instagram')) {
         return <InstagramFeeds />;
     }
-    else if(platform.includes('facebook')) {
+    else if (platform.includes('facebook')) {
         return <FacebookFeeds />;
     }
-    return <Text>Hello, {platform} </Text>;
+    else if (platform.includes('reddit')) {
+        return <RedditFeeds />;
+    }
+    else {
+        const [updateField, setField] = useState('');
+        const items = [
+            { label: 'Github', value: 'github' },
+            { label: 'Twitter', value: 'twitter' },
+            { label: 'Facebook', value: 'facebook' },
+            { label: 'Instagram', value: 'instagram' },
+            { label: 'Reddit', value: 'reddit' }
+        ];
+
+        const handleSelect = (item) => {
+            setField(item.value);
+        };
+
+        if (updateField === '') {
+            return (
+                <>
+                    <Box borderStyle="round" paddingLeft={1} width={51} borderColor="#00FFFF">
+                        <Text color="yellow" >Select the Social Media to see feed : </Text>
+                    </Box>
+                    <SelectInput items={items} onSelect={handleSelect} />
+                </>
+            );
+        }
+        else {
+            if (updateField == 'github') {
+                return <GithubFeeds />;
+            }
+            else if (updateField == 'instagram') {
+                return <InstagramFeeds />;
+            }
+            else if (updateField == 'twitter') {
+                return <TwitterFeeds />
+            }
+            else if (updateField == 'facebook') {
+                return <FacebookFeeds />
+            }
+            else if (updateField == 'reddit') {
+                return <RedditFeeds />
+            }
+        }
+
+    }
+    // return <Text>Hello, {platform} </Text>;
 };
 
 Feeds.propTypes = {
-	/// Name of the Platform to fetch Feeds
-	platform: PropTypes.string.isRequired
+    /// Name of the Platform to fetch Feeds
+    platform: PropTypes.string
 };
 
 Feeds.shortFlags = {
     platform: 'pf'
 };
+
 
 export default Feeds;
