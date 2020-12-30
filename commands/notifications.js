@@ -6,7 +6,6 @@ import GithubNotifications from "../components/notification/GithubNotifications"
 import TwitterNotifications from "../components/notification/TwitterNotifications"
 import InstagramNotifications from "../components/notification/InstagramNotifications"
 import RedditNotifications from "../components/notification/RedditNotifications"
-
 /// Get Latest Notification command
 const Notifications = ({ platform = "" }) => {
     if (platform.includes('github')) {
