@@ -34,7 +34,6 @@ const GithubSearch = (props) => {
                     arr.push(ans)
                 }
                 setFeeds(arr)
-                // setFeeds(res.data.items.slice(0,2))
                 setLoading(false)
             })
             .catch(err => {
@@ -65,7 +64,6 @@ const GithubSearch = (props) => {
         return <Loader message=" Fetching Github feeds..." type="dots" />
     }
     else {
-        // console.log(feeds);
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">

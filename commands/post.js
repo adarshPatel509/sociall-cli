@@ -4,7 +4,6 @@ import { Text, Box } from 'ink';
 import SelectInput from 'ink-select-input';
 import TwitterPostData from "../components/post/TwitterPostData"
 import GithubPostData from "../components/post/GithubPostData"
-// import FacebookFeeds from "../components/feed/FacebookFeeds"
 import InstagramPostData from "../components/post/InstagramPostData"
 import RedditPostData from "../components/post/RedditPostData"
 
@@ -22,9 +21,6 @@ const Post = ({ platform = "" }) => {
     else if (platform.includes('instagram')) {
         return <InstagramPostData />;
     }
-    // else if (platform.includes('facebook')) {
-    //     return <FacebookFeeds />;
-    // }
     else if (platform.includes('reddit')) {
         return <RedditPostData />;
     }
@@ -62,16 +58,13 @@ const Post = ({ platform = "" }) => {
             else if (updateField == 'twitter') {
                 return <TwitterPostData />
             }
-            // else if (updateField == 'facebook') {
-            //     return <FacebookFeeds />
-            // }
             else if (updateField == 'reddit') {
                 return <RedditPostData />
             }
         }
 
     }
-    // return <Text>Hello, {platform} </Text>;
+    return <Text>Hello, {platform} </Text>;
 };
 
 Post.propTypes = {
@@ -80,7 +73,7 @@ Post.propTypes = {
 };
 
 Post.shortFlags = {
-    platform: 'pf'
+    platform: 'p'
 };
 
 

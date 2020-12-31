@@ -17,12 +17,6 @@ const UnFollow = ({ platform = "" ,username}) => {
     else if (platform.includes('twitter')) {
         return <TwitterUnFollow username = {username}/>;
     }
-    // else if (platform.includes('instagram')) {
-    //     return <InstagramFeeds />;
-    // }
-    // else if (platform.includes('facebook')) {
-    //     return <FacebookFeeds />;
-    // }
     else if (platform.includes('reddit')) {
         return <RedditUnFollow username = {username} />;
     }
@@ -54,15 +48,9 @@ const UnFollow = ({ platform = "" ,username}) => {
             if (updateField == 'github') {
                 return <GithubUnFollow username = {username}/>;
             }
-            // else if (updateField == 'instagram') {
-            //     return <InstagramFeeds />;
-            // }
             else if (updateField == 'twitter') {
                 return <TwitterUnFollow username = {username}/>
             }
-            // else if (updateField == 'facebook') {
-            //     return <FacebookFeeds />
-            // }
             else if (updateField == 'reddit') {
                 return <RedditUnFollow username = {username} />
             }
@@ -79,7 +67,7 @@ UnFollow.propTypes = {
 };
 
 UnFollow.shortFlags = {
-    platform: 'pf',
+    platform: 'p',
     username:'u'
 };
 

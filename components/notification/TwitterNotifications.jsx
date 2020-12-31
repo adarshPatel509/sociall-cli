@@ -29,7 +29,6 @@ const TwitterNotifications = () => {
                     arr.push(ans)
                     
                 }
-                // console.log(arr)
                 setNotifications(arr);
                 setLoading(false);
             })

@@ -29,7 +29,6 @@ const InstagramFollowers = () => {
                   arr.push(ans)
                 }
                 setFeeds(arr)
-                // setFeeds(items)
                 setLoading(false)
             } catch(e) {
                 console.log(e)
@@ -59,7 +58,6 @@ const InstagramFollowers = () => {
         return <Loader message=" Fetching Instagram Following ..." type="dots" />
     }
     else {
-        // console.log(feeds);
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">

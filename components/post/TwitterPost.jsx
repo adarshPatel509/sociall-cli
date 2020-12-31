@@ -18,7 +18,6 @@ const RedditPost = (props) => {
 					media_data: b64content,
 				})
 				.then((resp) => {
-					// console.log(res.data);
 					const { media_id_string } = resp.data;
 					twit
 						.post("statuses/update", {
@@ -61,7 +60,6 @@ const RedditPost = (props) => {
 	if (isLoading) {
 		return <Loader message=" Posting Twitter Post..." type="dots" />;
 	} else {
-		// console.log(postData);
 		return (
 			<>
 				<Box

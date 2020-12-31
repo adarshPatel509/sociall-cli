@@ -66,7 +66,7 @@ const TwitterFeeds = () => {
 				setLoading(false);
 			})
 			.catch((err) => {
-				// console.log(err);
+				console.log(err);
 			});
 	}, []);
 
@@ -88,7 +88,6 @@ const TwitterFeeds = () => {
 	if (isLoading) {
 		return <Loader message=" Fetching Twitter feeds..." type="dots" />;
 	} else {
-		// console.log(feeds);
 		return (
 			<>
 				<Box
@@ -130,7 +129,6 @@ const LikeRetweet = (props) => {
 	useEffect(() => {
 		if (activeTab == "like" && btnPressed) {
 			like();
-			// console.log("Done!!");
 		} else if (activeTab == "retweet" && btnPressed) {
 			retweet();
 		}

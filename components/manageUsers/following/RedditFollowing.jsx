@@ -31,7 +31,6 @@ const GithubFollowing = () => {
                         arr.push(ans)
                 }
                 setFeeds(arr)
-                // setFeeds(res.data.children)
                 setLoading(false)
             })
             .catch(err => {
@@ -61,7 +60,6 @@ const GithubFollowing = () => {
         return <Loader message=" Fetching Reddit Following ..." type="dots" />
     }
     else {
-        // console.0(feeds);
         return (
             <>
                <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">

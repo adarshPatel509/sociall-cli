@@ -13,7 +13,6 @@ const UpdateTwitterProfile = (props) => {
 
   useEffect(() => {
     if (Object.keys(props.updateObj)[0] == "profile_photo") {
-      // console.log(props.updateObj.profile_photo);
       const b64content = fs.readFileSync(props.updateObj.profile_photo, { encoding: 'base64' });
       twit.post('account/update_profile_image', { image: b64content })
         .then(res => {

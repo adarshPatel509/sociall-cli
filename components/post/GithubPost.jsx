@@ -31,7 +31,6 @@ const GithubPost = (props) => {
     return <Loader message=" Creating Github Repo..." type="dots" />
     }
     else {
-        // console.log(postData);
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignItems="center">

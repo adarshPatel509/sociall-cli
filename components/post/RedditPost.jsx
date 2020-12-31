@@ -45,7 +45,6 @@ const RedditPost = (props) => {
 	if (isLoading) {
 		return <Loader message=" Posting Reddit Post..." type="dots" />;
 	} else {
-		// console.log(feeds);
 		return (
 			<>
 				<Box

@@ -26,8 +26,6 @@ const TwitterFollowing = () => {
                     arr.push(ans)
                 }
                 setFeeds(arr)
-                // console.log(res);
-                // setFeeds(res.data.users)
                 setLoading(false)
             })
             .catch(err => {
@@ -57,7 +55,6 @@ const TwitterFollowing = () => {
         return <Loader message=" Fetching Twitter Following ..." type="dots" />
     }
     else {
-        // console.log(feeds);
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">

@@ -54,7 +54,6 @@ const GithubFollowing = () => {
         return <Loader message=" Fetching Github Following ..." type="dots" />
     }
     else {
-        // console.log(feeds);
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">

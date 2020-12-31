@@ -18,24 +18,17 @@ const InstagramPost = (props) => {
 	useEffect(() => {
 		(async () => {
 			try {
-				// const rStream = createReadStream('Land_of_Runes.png')
-				// const items = await ig.upload.photo(rStream);
 				const auth = await ig.account.login(
 					config["instagram"]["username"],
 					config["instagram"]["password"]
 				);
 				const path = props.data.path;
 				const publishResult = await ig.publish.photo({
-					// read the file into a Buffer
 					file: await readFileAsync(path),
-					// optional, default ''
 					caption: props.data.bio,
 				});
                 const postUrl = "https://www.instagram.com/p/" + publishResult.media.code +"/"
                 setUrl(postUrl)
-				// console.log(publishResult);
-
-				// console.log(imageUpload);
 				setLoading(false);
 			} catch (e) {
 				console.log(e);
@@ -46,7 +39,6 @@ const InstagramPost = (props) => {
 	if (isLoading) {
 		return <Loader message=" Posting Instagram Post..." type="dots" />;
 	} else {
-		// console.log(feeds);
 		return (
 			<>
 				<Box

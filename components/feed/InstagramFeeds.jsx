@@ -35,11 +35,9 @@ const InstagramFeeds = () => {
 						} = items[i],
 						text = "",
 						loc_name = "";
-					//   const text = caption.text
 					var { username, full_name } = user;
 					var user_url = "https://www.instagram.com/" + username,
 						post_url = "https://www.instagram.com/p/" + code;
-					//   const loc_name = location.name
 					if (caption) {
 						text = caption.text;
 					}
@@ -80,7 +78,6 @@ const InstagramFeeds = () => {
 					arr.push(ans);
 				}
 				setFeeds(arr);
-				// setFeeds(items)
 				setLoading(false);
 			} catch (e) {
 				console.log(e);
@@ -106,7 +103,6 @@ const InstagramFeeds = () => {
 	if (isLoading) {
 		return <Loader message=" Fetching Instagram feeds..." type="dots" />;
 	} else {
-		// console.log(feeds);
 		return (
 			<>
 				{
@@ -138,8 +134,6 @@ const CommentBox = (props) => {
 
 	useEffect(() => {
 		if (comment != "") {
-			console.log("comment", comment);
-			//make comment api calls
 			ig.media.comment({
 				mediaId: props.id,
 				text: comment,

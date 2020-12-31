@@ -16,7 +16,6 @@ const InstagramNotifications = () => {
                 const auth = await ig.account.login(config['instagram']['username'], config['instagram']['password']);
                 const following = ig.news.inbox(auth.pk);
                 following.then(res => {
-                    // console.log(res.old_stories)
                     const x = res.old_stories
                     var arr = []
                     for(let i = 0;i<x.length;i++)
@@ -45,7 +44,6 @@ const InstagramNotifications = () => {
                 })
                 .catch(err => console.log(err))
                 
-                // setNotifications(following)
                 setLoading(false)
             } catch(e) {
                 console.log(e)
@@ -57,7 +55,6 @@ const InstagramNotifications = () => {
         return <Loader message=" Fetching Notifications..." type="dots" />
     }
     else {
-        // console.log(notifications);
         return <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignItems="center">
             {notifications.map((x, index) => {
                 return x

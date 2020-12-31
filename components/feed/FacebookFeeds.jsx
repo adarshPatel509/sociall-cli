@@ -18,9 +18,7 @@ const FacebookFeeds = () => {
 		});
 	}, []);
 
-	// if(isLoading) {
 	return <Loader message=" Fetching Facebook feeds..." type="dots" />;
-	// }
 };
 
 export default FacebookFeeds;

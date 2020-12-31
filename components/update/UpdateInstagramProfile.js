@@ -27,7 +27,6 @@ const UpdateInstagramProfile = (props) => {
         if (key == "profile_photo") {
           const path = props.updateObj[fkey]
           const imageUpload = await ig.account.changeProfilePicture(await readFileAsync(path))
-          // console.log(imageUpload);
         }
         else {
           if (key == "name") {
@@ -62,7 +61,6 @@ const UpdateInstagramProfile = (props) => {
     return <Loader message=" Updating Instagram Profile..." type="dots" />;
   }
   else {
-    // console.log(feeds);
     return <Text color="green">Instagram Profile Updated!!</Text>
 
   }

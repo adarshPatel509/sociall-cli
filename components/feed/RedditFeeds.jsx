@@ -50,12 +50,10 @@ const RedditFeeds = () => {
 								nc={num_comments}
 								id={name}
 							/>
-							{/* <Text>{"\uD83D\uDD3C"} : {ups} {"\uD83D\uDD3D"} : {downs} {"\uD83C\uDFC6"} : {total_awards_received} {"\uD83D\uDCAC"} : {num_comments}</Text> */}
 						</Box>
 					);
 					arr.push(ans);
 				}
-				// console.log(res.data.children.slice(0, 5))
 				setFeeds(arr);
 				setLoading(false);
 			})
@@ -82,7 +80,6 @@ const RedditFeeds = () => {
 	if (isLoading) {
 		return <Loader message=" Fetching Reddit feeds..." type="dots" />;
 	} else {
-		// console.log(feeds);
 		return (
 			<>
 				<Box
@@ -111,8 +108,6 @@ const CommentBox = (props) => {
 
 	useEffect(() => {
 		if (comment != "") {
-			console.log("comment", comment);
-			//make comment api calls
 			reddit.post("/api/comment", {
 				thing_id: props.id,
 				text: comment,
@@ -157,10 +152,8 @@ const LikeComment = (props) => {
 	useEffect(() => {
 		if (activeTab == "up" && btnPressed) {
 			upvote();
-			// console.log("Done!!");
 		} else if (activeTab == "down" && btnPressed) {
 			downvote();
-			// console.log("Done!!");
 		}
 	});
 

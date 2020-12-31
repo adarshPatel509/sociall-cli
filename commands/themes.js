@@ -7,7 +7,6 @@ const th = require('../themes.json')
 
 const Themes = () => {
     const [updateField, setField] = useState("");
-    // console.log(th)
 
     const items = [
         { label: 'Default', value: 'default' },
@@ -36,7 +35,6 @@ const Themes = () => {
         fs.writeFile('themes.json',JSON.stringify(th), function writeJSON(err) {
             if (err) return console.log(err);
           })
-        // console.log(th)
         return <Text color='red'>Theme Updated to <Text>{updateField}</Text> !!</Text>;
 
     }

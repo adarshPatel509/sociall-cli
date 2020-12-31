@@ -21,9 +21,6 @@ const Follow = ({ platform = "" ,username}) => {
     else if (platform.includes('instagram')) {
         return <InstagramFollow username = {username}/>;
     }
-    // else if (platform.includes('facebook')) {
-    //     return <FacebookFeeds />;
-    // }
     else if (platform.includes('reddit')) {
         return <RedditFollow username = {username}/>;
     }
@@ -61,9 +58,7 @@ const Follow = ({ platform = "" ,username}) => {
             else if (updateField == 'twitter') {
                 return <TwitterFollow username = {username}/>
             }
-            // else if (updateField == 'facebook') {
-            //     return <FacebookFeeds />
-            // }
+
             else if (updateField == 'reddit') {
                 return <RedditFollow username = {username} />
             }
@@ -80,7 +75,7 @@ Follow.propTypes = {
 };
 
 Follow.shortFlags = {
-    platform: 'pf',
+    platform: 'p',
     username:'u'
 };
 

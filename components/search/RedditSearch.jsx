@@ -35,7 +35,6 @@ const RedditSearch = (props) => {
                     </Box>
                     arr.push(ans)
                 }
-                // console.log(res.data.children.slice(0, 10))
                 setFeeds(arr)
                 setLoading(false)
             })
@@ -66,7 +65,6 @@ const RedditSearch = (props) => {
     return <Loader message=" Fetching Reddit feeds..." type="dots" />
     }
     else {
-        // console.log(feeds);
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignItems="center">
