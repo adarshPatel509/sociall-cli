@@ -4,8 +4,6 @@ import Link from 'ink-link';
 import Loader from '../../utils/loader';
 import { twit } from "../../utils/api-clients"
 import DateFormatter from "../../utils/date-formatter"
-const feed_reply = require("../../feed_reply.json")
-const config = require("../../config.json")
 
 const TwitterSearch = (props) => {
     const [isLoading, setLoading] = useState(true);

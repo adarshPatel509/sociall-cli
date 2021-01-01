@@ -4,7 +4,7 @@ import Link from "ink-link";
 import Loader from "../../utils/loader";
 import { octokit } from "../../utils/api-clients";
 import DateFormatter from "../../utils/date-formatter";
-const feed_reply = require("./feed_reply.json");
+const feed_reply = require("../../utils/feed_reply.json");
 const config = require("../../config.json");
 
 const GithubFeeds = () => {

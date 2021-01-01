@@ -13,22 +13,9 @@ const InstagramFollow = (props) => {
     useEffect( () => {
         (async () => {
             try {
-                const auth = await ig.account.login(config['instagram']['username'], config['instagram']['password']);
-                const followers = ig.friendship.create();
-                const items = await followers;
-                // var arr = []
-                // for(let i = 0;i<items.length;i++)
-                // {
-                //     const username = items[i].username,full_name=items[i].full_name
-                //     const url="https://www.instagram.com/"+username
-
-                //       const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" width="90%" alignSelf="center">
-                //             <Text bold>{arr.length +1}. <Link url={url} >{username}</Link></Text>
-                //             <Text>{full_name}</Text>
-                //         </Box>
-                //   arr.push(ans)
-                // }
-                setFeeds(items)
+                const user = await ig.user.searchExact(props.username)
+                const follow = await ig.friendship.create(user.pk);
+                setFeeds(follow)
                 setLoading(false)
             } catch(e) {
                 console.log(e)

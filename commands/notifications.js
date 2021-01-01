@@ -14,8 +14,7 @@ const Notifications = ({ platform = "" }) => {
 		return <TwitterNotifications />;
 	} else if (platform.includes("instagram")) {
 		return <InstagramNotifications />;
-	}
-	else if (platform.includes("reddit")) {
+	} else if (platform.includes("reddit")) {
 		return <RedditNotifications />;
 	} else {
 		const [updateField, setField] = useState("");
