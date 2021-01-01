@@ -5,7 +5,7 @@ import Loader from "../../../utils/loader";
 import { ig } from "../../../utils/api-clients";
 const config = require("../../../config.json");
 
-const InstagramFollow = (props) => {
+const InstagramUnFollow = (props) => {
 	const [isLoading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -16,7 +16,7 @@ const InstagramFollow = (props) => {
 					config["instagram"]["password"]
 				);
 				const user = await ig.user.searchExact(props.username);
-				const follow = await ig.friendship.create(user.pk);
+				const follow = await ig.friendship.destroy(user.pk);
 				setLoading(false);
 			} catch (e) {
 				console.log(e);
@@ -25,14 +25,14 @@ const InstagramFollow = (props) => {
 	}, []);
 
 	if (isLoading) {
-		return <Loader message=" Following ..." type="dots" />;
+		return <Loader message=" UnFollowing ..." type="dots" />;
 	} else {
 		return (
 			<>
-				<Text color="greenBright">Followed {props.username}</Text>
+				<Text color="greenBright">UnFollowed {props.username}</Text>
 			</>
 		);
 	}
 };
 
-export default InstagramFollow;
+export default InstagramUnFollow;
