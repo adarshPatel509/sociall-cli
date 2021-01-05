@@ -15,7 +15,7 @@ const GithubFollowers = () => {
             username: config["github"]["username"]
         })
             .then(res => {
-                var arr = [],user_data;
+                var arr = [];
                 for (let i = 0; i < res.data.length; i++) { 
                     const login = res.data[i].login,url=res.data[i].html_url,url1 = res.data[i].url  
                     const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" width="90%" alignSelf="center">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Text, Box, useInput } from "ink";
+import { Text, Box, useFocus, useInput } from "ink";
+import { Tabs, Tab } from "ink-tab";
 import Link from "ink-link";
 import Loader from "../../utils/loader";
 import { octokit } from "../../utils/api-clients";
@@ -49,6 +50,8 @@ const GithubFeeds = () => {
 									</Text>
 								</Link>
 							</Text>
+							<StarFork data={{ name }} />
+							<Text></Text>
 							<Text>-{created_at}</Text>
 						</Box>
 					);
@@ -70,9 +73,9 @@ const GithubFeeds = () => {
 
 		if (input === "q" || input === "Q") {
 			process.exit();
-		} else if (key.leftArrow) {
+		} else if (key.upArrow) {
 			setPg(Math.max(1, pg - 1));
-		} else if (key.rightArrow) {
+		} else if (key.downArrow) {
 			setPg(Math.min(pg + 1, temp));
 		}
 	});
@@ -99,5 +102,88 @@ const GithubFeeds = () => {
 		);
 	}
 };
+
+
+const StarFork = (props) => {
+	const [activeTab, setActiveTab] = useState(null);
+	const { isFocused } = useFocus();
+	const [btnPressed, SetBtnPressed] = useState(false);
+
+	const star = () => {
+		const put_req = 'PUT /user/starred/' + props.data.name
+		octokit.request(put_req).then(res => {
+			// console.log(res);
+		}).catch(err => {
+			console.log(err);
+		})
+	}
+
+	const watch = () => {
+		const put_req = 'PUT /repos/' + props.data.name + '/subscription'
+		octokit.request(put_req, {
+			subscribed: true
+		}).then(res => {
+			// console.log(res);
+		}).catch(err => {
+			console.log(err);
+		})
+	}
+
+	const fork = () => {
+		const post_req = 'POST /repos/' + props.data.name + '/forks'
+		console.log(post_req);
+		octokit.request(post_req).then(res => {
+			// console.log(res);
+		}).catch(err => {
+			console.log(err);
+		})
+	}
+
+	useEffect(() => {
+		if (activeTab == "star" && btnPressed) {
+			star();
+		} else if (activeTab == "watch" && btnPressed) {
+			watch();
+		} else if (activeTab == "fork" && btnPressed) {
+			fork();
+		}
+		if (btnPressed) {
+			SetBtnPressed(false);
+		}
+	});
+
+	useInput((input, key) => {
+		if (input === "s" || input === "S") {
+			SetBtnPressed(true);
+		}
+	});
+
+	const handleTabChange = (name, activeTab) => {
+		setActiveTab(name);
+	};
+
+	return (
+		<>
+			{isFocused ? (
+				<Tabs onChange={handleTabChange}>
+					<Tab name="star">
+						{"\u2B50"} star
+					</Tab>
+					<Tab name="watch">
+						{"\uD83D\uDC41\uFE0F"} watch
+					</Tab>
+					<Tab name="fork">
+						{"\uD83D\uDCCC"}  fork
+					</Tab>
+				</Tabs>
+			) : (
+					<Text>
+						{"\u2B50"} star  {"\uD83D\uDC41\uFE0F"}  watch  {"\uD83D\uDCCC"} fork
+					</Text>
+				)}
+		</>
+	);
+
+}
 
 export default GithubFeeds;

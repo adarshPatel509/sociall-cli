@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { Text, Box } from "ink";
 import SelectInput from "ink-select-input";
 import TwitterSearch from "../components/search/TwitterSearch";
-import GithubSearch from "../components/search/GithubSearch";
+import { GithubSelect } from "../components/search/GithubSearch";
 import InstagramSearch from "../components/search/InstagramSearch";
 import RedditSearch from "../components/search/RedditSearch";
 
 /// Get Search Result Commands
 const Search = ({ platform = "", searchField }) => {
 	if (platform.includes("github")) {
-		return <GithubSearch searchField={searchField} />;
+		return <GithubSelect searchField={searchField} />;
 	} else if (platform.includes("twitter")) {
 		return <TwitterSearch searchField={searchField} />;
 	} else if (platform.includes("instagram")) {
@@ -47,7 +47,7 @@ const Search = ({ platform = "", searchField }) => {
 			);
 		} else {
 			if (updateField == "github") {
-				return <GithubSearch searchField={searchField} />;
+				return <GithubSelect searchField={searchField} />;
 			} else if (updateField == "instagram") {
 				return <InstagramSearch searchField={searchField} />;
 			} else if (updateField == "twitter") {

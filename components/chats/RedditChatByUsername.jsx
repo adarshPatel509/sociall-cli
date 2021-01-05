@@ -4,19 +4,16 @@ import Loader from '../../utils/loader';
 import { reddit } from "../../utils/api-clients"
 import DateFormatter from "../../utils/date-formatter"
 
-const RedditNotifications = (props) => {
+const RedditChatByUsername = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [notifications, setNotifications] = useState({});
 
     useEffect(() => {
-        reddit.get('/message/inbox')
+        reddit.get('/api/read_all_messages')
             .then(res => {
-                setNotifications(res.data.children);
+                setNotifications(res);
                 setLoading(false);
-                // // const user = await ig.user.searchExact("avnishraut");
-                // // let x = await ig.entity.profile(user.pk)
-                // // // let threadFeed = await ig.feed.directThread({"thread_id": x.thread_id});
-                // // // let chatsInAThread = await threadFeed.items();
+
             })
             .catch(err => {
                 console.log(err);
@@ -37,4 +34,4 @@ const RedditNotifications = (props) => {
     }
 }
 
-export default RedditNotifications
+export default RedditChatByUsername
