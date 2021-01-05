@@ -26,6 +26,8 @@
 		"instagram-private-api": "^1.43.3",
 		"instagram-web-api": "^2.2.2",
 		"javascript-time-ago": "^2.3.4",
+		"lodash": "^4.17.20",
+		"moment": "^2.29.1",
 		"pastel": "^1.1.1",
 		"prop-types": "^15.7.2",
 		"react": "^16.13.1",

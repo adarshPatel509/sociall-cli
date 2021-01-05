@@ -8,7 +8,7 @@ import InstagramPostData from "../components/post/InstagramPostData"
 import RedditPostData from "../components/post/RedditPostData"
 
 
-/// Get Latest Feeds command
+/// All Post Commands
 const Post = ({ platform = "" }) => {
 
 
@@ -68,7 +68,7 @@ const Post = ({ platform = "" }) => {
 };
 
 Post.propTypes = {
-    /// Name of the Platform to fetch Feeds
+    /// Name of the Platform to post a Post
     platform: PropTypes.string
 };
 

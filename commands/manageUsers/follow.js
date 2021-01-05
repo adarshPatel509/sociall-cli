@@ -8,21 +8,21 @@ import RedditFollow from "../../components/manageUsers/follow/RedditFollow"
 import InstagramFollow from "../../components/manageUsers/follow/InstagramFollow"
 
 
-/// Get Latest Feeds command
-const Follow = ({ platform = "" ,username}) => {
+/// Follow user of given username
+const Follow = ({ platform = "", username }) => {
 
 
     if (platform.includes('github')) {
-        return <GithubFollow username = {username}/>;
+        return <GithubFollow username={username} />;
     }
     else if (platform.includes('twitter')) {
-        return <TwitterFollow username = {username}/>;
+        return <TwitterFollow username={username} />;
     }
     else if (platform.includes('instagram')) {
-        return <InstagramFollow username = {username}/>;
+        return <InstagramFollow username={username} />;
     }
     else if (platform.includes('reddit')) {
-        return <RedditFollow username = {username}/>;
+        return <RedditFollow username={username} />;
     }
     else {
         const [updateField, setField] = useState('');
@@ -50,17 +50,17 @@ const Follow = ({ platform = "" ,username}) => {
         }
         else {
             if (updateField == 'github') {
-                return <GithubFollow username = {username}/>;
+                return <GithubFollow username={username} />;
             }
             else if (updateField == 'instagram') {
-                return <InstagramFollow username = {username}/>;
+                return <InstagramFollow username={username} />;
             }
             else if (updateField == 'twitter') {
-                return <TwitterFollow username = {username}/>
+                return <TwitterFollow username={username} />
             }
 
             else if (updateField == 'reddit') {
-                return <RedditFollow username = {username} />
+                return <RedditFollow username={username} />
             }
         }
 
@@ -69,14 +69,15 @@ const Follow = ({ platform = "" ,username}) => {
 };
 
 Follow.propTypes = {
-    /// Name of the Platform to fetch Feeds
+    /// Name of the Platform to follow the user
     platform: PropTypes.string,
-    username:PropTypes.string.isRequired
+    /// Username of the user to follow
+    username: PropTypes.string.isRequired
 };
 
 Follow.shortFlags = {
     platform: 'p',
-    username:'u'
+    username: 'u'
 };
 
 

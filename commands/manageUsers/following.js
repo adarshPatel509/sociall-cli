@@ -8,7 +8,7 @@ import RedditFollowing from "../../components/manageUsers/following/RedditFollow
 import InstagramFollowing from "../../components/manageUsers/following/InstagramFollowing"
 
 
-/// Get Latest Feeds command
+/// Get all the followings
 const Following = ({ platform = "" }) => {
 
 
@@ -69,7 +69,7 @@ const Following = ({ platform = "" }) => {
 };
 
 Following.propTypes = {
-    /// Name of the Platform to fetch Feeds
+    /// Name of the Platform to fetch followings from
     platform: PropTypes.string
 };
 

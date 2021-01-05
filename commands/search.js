@@ -7,7 +7,7 @@ import GithubSearch from "../components/search/GithubSearch";
 import InstagramSearch from "../components/search/InstagramSearch";
 import RedditSearch from "../components/search/RedditSearch";
 
-/// Get Latest Feeds command
+/// Get Search Result Commands
 const Search = ({ platform = "", searchField }) => {
 	if (platform.includes("github")) {
 		return <GithubSearch searchField={searchField} />;
@@ -62,8 +62,9 @@ const Search = ({ platform = "", searchField }) => {
 };
 
 Search.propTypes = {
-	/// Name of the Platform to fetch Feeds
+	/// Name of the Platform to fetch search result
 	platform: PropTypes.string,
+	/// Text to fetch search result of
 	searchField: PropTypes.string.isRequired,
 };
 

@@ -7,7 +7,7 @@ import TwitterUnFollow from "../../components/manageUsers/unfollow/TwitterUnFoll
 import RedditUnFollow from "../../components/manageUsers/unfollow/RedditUnFollow";
 import InstagramUnFollow from "../../components/manageUsers/unfollow/InstagramUnFollow";
 
-/// Get Latest Feeds command
+/// UnFollow user of given username
 const UnFollow = ({ platform = "", username }) => {
 	if (platform.includes("github")) {
 		return <GithubUnFollow username={username} />;
@@ -63,8 +63,9 @@ const UnFollow = ({ platform = "", username }) => {
 };
 
 UnFollow.propTypes = {
-	/// Name of the Platform to fetch Feeds
+	/// Name of the Platform to unfollow the user
 	platform: PropTypes.string,
+	/// Username of the user to unfollow
 	username: PropTypes.string.isRequired,
 };
 

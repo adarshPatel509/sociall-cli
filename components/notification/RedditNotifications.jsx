@@ -3,36 +3,37 @@ import { Text, Box } from 'ink';
 import Loader from '../../utils/loader';
 import { reddit } from "../../utils/api-clients"
 import DateFormatter from "../../utils/date-formatter"
+import Link from "ink-link"
 
 const RedditNotifications = () => {
     const [isLoading, setLoading] = useState(true);
     const [notifications, setNotifications] = useState({});
 
     useEffect(() => {
-        reddit.get('/best')
+        reddit.get('/message/inbox')
             .then(res => {
-                const arr = []
-                // for (let i = 0; i < res.data.length; i++) {
-                //     const {
-                //         reason,
-                //         subject,
-                //         repository
-                //     } = res.data[i];
-                //     const {
-                //         title,
-                //         type
-                //     } = subject
-                //     const {
-                //         name,
-                //         owner,
-                //     } = repository
-                //     const { login } = owner
-                //     const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" width="90%" alignSelf="center">
-                //         <Text><Text bold >{login}</Text> generated <Text color={"blue"}>{feed_reply[type]["emoji"]}  {type}</Text> in {name} repo of title <Text underline>"{title}"</Text> </Text>
-                //         <Text>You got the Notifications because you have <Text underline>{reason}</Text></Text>
-                //     </Box>
-                //     arr.push(ans)
-                // }
+                const arr = [], data = res.data.children
+                for (let i = 0; i < data.length; i++) {
+                    const { kind } = data[i]
+                    let { link_title, subject, body, context } = data[i].data
+                    const url = "https://www.reddit.com" + context
+                    const ans = (
+                        <Box
+                            key={arr.length}
+                            borderStyle="round"
+                            borderColor="red"
+                            paddingLeft={2}
+                            flexDirection="column"
+                            width="90%"
+                            alignSelf="center"
+                        >
+                            <Text bold>{subject} : {link_title}</Text>
+                            <Text>{body}</Text>
+                            {context.length > 0 && <Link url={url} >Link</Link>}
+                        </Box>
+                    );
+                    arr.push(ans);
+                }
                 setNotifications(arr);
                 setLoading(false);
             })
@@ -42,14 +43,14 @@ const RedditNotifications = () => {
     }, []);
 
     if (isLoading) {
-        return <Loader message=" Fetching Notifications..." type="dots" />
+        return <Loader message=" Fetching Reddit Notifications..." type="dots" />
     }
     else {
         // console.log(notifications);
         return <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignItems="center">
-            {/* {notifications.map((x, index) => {
+            {notifications.map((x, index) => {
                 return x
-            })} */}
+            })}
         </Box>
     }
 }

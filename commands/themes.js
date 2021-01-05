@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const fs = require("fs")
 const th = require('../themes.json')
 
+/// Change Theme Command
 const Themes = () => {
     const [updateField, setField] = useState("");
 

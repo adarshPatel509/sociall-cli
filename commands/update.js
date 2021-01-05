@@ -6,6 +6,7 @@ import { UncontrolledTextInput } from "ink-text-input";
 import UpdateGithubProfile from "../components/update/UpdateGithubProfile";
 import UpdateInstagramProfile from "../components/update/UpdateInstagramProfile";
 import UpdateTwitterProfile from "../components/update/UpdateTwitterProfile";
+
 /// Update Your Profile
 const UpdateProfile = ({ platform }) => {
 	const [updateField, setField] = useState("");
