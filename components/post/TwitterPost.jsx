@@ -2,9 +2,83 @@ import React, { useState, useEffect } from "react";
 import { Text, Box } from "ink";
 import Loader from "../../utils/loader";
 import { twit } from "../../utils/api-clients";
+import { UncontrolledTextInput } from "ink-text-input";
+import SelectInput from "ink-select-input";
+
 const fs = require("fs");
 
-const RedditPost = (props) => {
+
+const TwitterPostData = (props) => {
+	const [postData, setPostData] = useState({
+		text: props.data.text,
+		path: props.data.path,
+		type: props.data.type,
+	});
+	const items = [
+		{ label: "Media", value: "media" },
+		{ label: "Text", value: "text" },
+	];
+	function handleTypeSubmit(newValue) {
+		setPostData({
+			...postData,
+			type: newValue.value,
+		});
+	}
+
+	function handleTextSubmit(newValue) {
+		setPostData({
+			...postData,
+			text: newValue,
+		});
+	}
+
+
+
+	function handlePathSubmit(newValue) {
+		setPostData({
+			...postData,
+			path: newValue,
+		});
+	}
+
+	if (postData.type == "") {
+		return (
+			<>
+				<Box
+					borderStyle="round"
+					paddingLeft={1}
+					width={51}
+					borderColor="#00FFFF"
+				>
+					<Text color="yellow">Select the type of Post : </Text>
+				</Box>
+				<SelectInput items={items} onSelect={handleTypeSubmit} />
+			</>
+		);
+	} else if (postData.text == "") {
+		return (
+			<Box width="100%">
+				<Box marginRight={1} flexDirection="column">
+					<Text>Enter Tweet Text :</Text>
+				</Box>
+				<UncontrolledTextInput onSubmit={handleTextSubmit} />
+			</Box>
+		);
+	} else if (postData.path == "" && postData.type === "media") {
+		return (
+			<Box width="100%">
+				<Box marginRight={1} flexDirection="column">
+					<Text>Enter Tweet Picture path :</Text>
+				</Box>
+				<UncontrolledTextInput onSubmit={handlePathSubmit} />
+			</Box>
+		);
+	} else {
+		return <TwitterPost status={postData} />;
+	}
+};
+
+const TwitterPost = (props) => {
 	const [isLoading, setLoading] = useState(true);
 	const [postData, setPostData] = useState({});
 
@@ -77,4 +151,4 @@ const RedditPost = (props) => {
 	}
 };
 
-export default RedditPost;
+export { TwitterPost, TwitterPostData };

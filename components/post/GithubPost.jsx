@@ -1,8 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Box } from 'ink';
+import { UncontrolledTextInput } from 'ink-text-input';
 import Link from 'ink-link';
 import Loader from '../../utils/loader';
 import { octokit } from "../../utils/api-clients"
+
+
+const GithubPostData = (props) => {
+    const [postData, setPostData] = useState({
+        name: props.data.title,
+        description: props.data.text
+    })
+
+    function handleNameSubmit(newValue) {
+        setPostData({
+            ...postData,
+            name: newValue
+        })
+    }
+
+    function handleDescriptionSubmit(newValue) {
+        setPostData({
+            ...postData,
+            description: newValue
+        })
+    }
+
+    if (postData.name == "") {
+        return (
+            <Box width="100%">
+                <Box marginRight={1} flexDirection="column">
+                    <Text>Enter Repo Name :</Text>
+                </Box>
+                <UncontrolledTextInput onSubmit={handleNameSubmit} />
+            </Box>
+        );
+    }
+    else if (postData.description == "") {
+        return (
+            <Box width="100%">
+                <Box marginRight={1} flexDirection="column">
+                    <Text>Enter Repo Description :</Text>
+                </Box>
+                <UncontrolledTextInput onSubmit={handleDescriptionSubmit} />
+            </Box>
+        );
+    }
+    else {
+        return <GithubPost data={postData} />
+    }
+}
 
 
 const GithubPost = (props) => {
@@ -12,8 +59,8 @@ const GithubPost = (props) => {
     useEffect(() => {
         octokit.request('POST /user/repos', {
             name: props.data.name,
-            description:props.data.description
-          })
+            description: props.data.description
+        })
             .then(res => {
                 setPostData(res.data.html_url)
                 setLoading(false)
@@ -28,7 +75,7 @@ const GithubPost = (props) => {
 
 
     if (isLoading) {
-    return <Loader message=" Creating Github Repo..." type="dots" />
+        return <Loader message=" Creating Github Repo..." type="dots" />
     }
     else {
         return (
@@ -42,4 +89,4 @@ const GithubPost = (props) => {
     }
 }
 
-export default GithubPost
+export { GithubPost, GithubPostData }

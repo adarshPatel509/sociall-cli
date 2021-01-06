@@ -28,11 +28,13 @@
 		"javascript-time-ago": "^2.3.4",
 		"lodash": "^4.17.20",
 		"moment": "^2.29.1",
+		"node-cmd": "^4.0.0",
 		"pastel": "^1.1.1",
 		"prop-types": "^15.7.2",
 		"re2": "^1.15.9",
 		"react": "^16.13.1",
 		"reddit": "^1.2.1",
+		"shelljs": "^0.8.4",
 		"twit": "^2.2.11"
 	}
 }

@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Text, Box } from "ink";
 import Loader from "../../utils/loader.js";
 import { ig } from "../../utils/api-clients";
-import { string } from "prop-types";
-import { createReadStream, readFile } from "fs";
+import { readFile } from "fs";
+import { UncontrolledTextInput } from 'ink-text-input';
 const config = require("../../config");
 const promisify = require("util.promisify");
 const fs = require("fs");
 const readFileAsync = promisify(readFile);
 /**
-    Update Instagram Profile
-    Api ref: https://github.com/jlobos/instagram-web-api#updateprofileparams
+	Update Instagram Profile
+	Api ref: https://github.com/jlobos/instagram-web-api#updateprofileparams
  */
 const InstagramPost = (props) => {
-    const [isLoading, setLoading] = useState(true);
-    const [url,setUrl] = useState("")
+	const [isLoading, setLoading] = useState(true);
+	const [url, setUrl] = useState("")
 	useEffect(() => {
 		(async () => {
 			try {
@@ -27,8 +27,8 @@ const InstagramPost = (props) => {
 					file: await readFileAsync(path),
 					caption: props.data.bio,
 				});
-                const postUrl = "https://www.instagram.com/p/" + publishResult.media.code +"/"
-                setUrl(postUrl)
+				const postUrl = "https://www.instagram.com/p/" + publishResult.media.code + "/"
+				setUrl(postUrl)
 				setLoading(false);
 			} catch (e) {
 				console.log(e);
@@ -37,7 +37,7 @@ const InstagramPost = (props) => {
 	}, []);
 
 	if (isLoading) {
-		return <Loader message=" Posting Instagram Post..." type="dots" />;
+		return <Loader message=" Posting on Instagram..." type="dots" />;
 	} else {
 		return (
 			<>
@@ -56,4 +56,51 @@ const InstagramPost = (props) => {
 	}
 };
 
-export default InstagramPost;
+
+const InstagramPostData = (props) => {
+	const [postData, setPostData] = useState({
+		path: props.data.path,
+		bio:props.data.text
+	})
+
+	function handlePathSubmit(newValue) {
+		setPostData({
+			...postData,
+			path: newValue
+		})
+	}
+
+	function handleBioSubmit(newValue) {
+		setPostData({
+			...postData,
+			bio: newValue
+		})
+	}
+
+	if (postData.path == "") {
+		return (
+			<Box width="100%">
+				<Box marginRight={1} flexDirection="column">
+					<Text>Enter Picture Path :</Text>
+				</Box>
+				<UncontrolledTextInput onSubmit={handlePathSubmit} />
+			</Box>
+		);
+	}
+	else if (postData.bio == "") {
+		return (
+			<Box width="100%">
+				<Box marginRight={1} flexDirection="column">
+					<Text>Enter Post Description :</Text>
+				</Box>
+				<UncontrolledTextInput onSubmit={handleBioSubmit} />
+			</Box>
+		);
+	}
+	else {
+		return <InstagramPost data={postData} />
+	}
+}
+
+
+export { InstagramPost, InstagramPostData };
