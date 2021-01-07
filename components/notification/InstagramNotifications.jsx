@@ -89,7 +89,7 @@ const InstagramNotifications = () => {
 	});
 
 	if (isLoading) {
-		return <Loader message=" Fetching Notifications..." type="dots" />;
+		return <Loader message=" Fetching Instagram Notifications..." type="dots" />;
 	} else {
 		return (
 			<Box

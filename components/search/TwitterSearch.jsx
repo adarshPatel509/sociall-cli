@@ -61,7 +61,7 @@ const TwitterSearch = (props) => {
 	});
 
     if (isLoading) {
-        return <Loader message=" Fetching Twitter feeds..." type="dots" />
+        return <Loader message=" Fetching Twitter Search Result..." type="dots" />
     }
     else {
         return (

@@ -58,7 +58,7 @@ const RedditSearch = (props) => {
 	});
 
     if (isLoading) {
-        return <Loader message=" Fetching Reddit feeds..." type="dots" />
+        return <Loader message=" Fetching Reddit Search Result..." type="dots" />
     }
     else {
         return (

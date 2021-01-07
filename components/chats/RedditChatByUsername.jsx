@@ -22,7 +22,7 @@ const RedditChatByUsername = (props) => {
     }, []);
 
     if (isLoading) {
-        return <Loader message=" Fetching Notifications..." type="dots" />
+        return <Loader message=" Fetching Reddit Chats..." type="dots" />
     }
     else {
         console.log(notifications);

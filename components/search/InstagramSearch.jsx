@@ -70,7 +70,7 @@ const InstagramSearch = (props) => {
 	});
 
 	if (isLoading) {
-		return <Loader message=" Fetching Instagram feeds..." type="dots" />;
+		return <Loader message=" Fetching Instagram Search Result..." type="dots" />;
 	} else {
 		return (
 			<>

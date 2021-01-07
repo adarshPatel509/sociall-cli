@@ -67,7 +67,7 @@ const GithubNotifications = () => {
 	});
 
 	if (isLoading) {
-		return <Loader message=" Fetching Notifications..." type="dots" />;
+		return <Loader message=" Fetching Github Notifications..." type="dots" />;
 	} else {
 		return (
 			<Box

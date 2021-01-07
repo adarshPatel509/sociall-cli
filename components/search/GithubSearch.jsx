@@ -113,7 +113,7 @@ const GithubSearch = (props) => {
     });
 
     if (isLoading) {
-        return <Loader message=" Fetching Github feeds..." type="dots" />
+        return <Loader message=" Fetching Github Search Result..." type="dots" />
     }
     else {
         return (

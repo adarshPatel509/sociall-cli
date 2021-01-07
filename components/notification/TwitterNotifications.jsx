@@ -52,7 +52,7 @@ const TwitterNotifications = () => {
     });
 
     if (isLoading) {
-        return <Loader message=" Fetching Notifications..." type="dots" />
+        return <Loader message=" Fetching Twitter Notifications..." type="dots" />
     }
     else {
         return <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center" >
