@@ -7,6 +7,7 @@ import { reddit } from "../../../utils/api-clients"
 const GithubFollowers = () => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
+	const [pgl, setPgl] = useState(1)
 
     useEffect(() => {
         reddit.get('/api/v1/me/friends')

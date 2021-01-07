@@ -12,6 +12,7 @@ const GithubFeeds = () => {
 	const [isLoading, setLoading] = useState(true);
 	const [feeds, setFeeds] = useState([]);
 	const [pg, setPg] = useState(1);
+	const [pgl, setPgl] = useState(1)
 
 	useEffect(() => {
 		octokit
@@ -71,6 +72,8 @@ const GithubFeeds = () => {
 				? parseInt(feeds.length / 5) + 1
 				: parseInt(feeds.length / 5);
 
+		setPgl(temp)
+
 		if (input === "q" || input === "Q") {
 			process.exit();
 		} else if (key.upArrow) {
@@ -96,7 +99,7 @@ const GithubFeeds = () => {
 					{feeds.slice((pg - 1) * 5, pg * 5).map((x, index) => {
 						return x;
 					})}
-					<Text>Page : {pg}</Text>
+					<Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
 				</Box>
 			</>
 		);

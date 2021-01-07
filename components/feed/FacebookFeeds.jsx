@@ -9,13 +9,16 @@ const FacebookFeeds = () => {
 	const [feeds, setFeeds] = useState([]);
 
 	useEffect(() => {
-		fb.api("/me/feed", "GET", (res) => {
-			if (!res || res.error) {
-				console.log("error!", res);
-			} else {
-				console.log(res);
+		fb.api(
+			"/me/accounts",
+			'GET',
+			function (response) {
+				if (response && !response.error) {
+					/* handle the result */
+					console.log(response);
+				}
 			}
-		});
+		);
 	}, []);
 
 	return <Loader message=" Fetching Facebook feeds..." type="dots" />;

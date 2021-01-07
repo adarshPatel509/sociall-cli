@@ -9,6 +9,7 @@ const GithubFollowing = () => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
     const [pg,setPg] = useState(1)
+	const [pgl, setPgl] = useState(1)
 
     useEffect(() => {
         octokit.request('GET /users/{username}/following', {
@@ -34,6 +35,7 @@ const GithubFollowing = () => {
 
     useInput((input,key) => {
         const temp = feeds.length%10 ? parseInt(feeds.length/10)+1 : parseInt(feeds.length/10)
+		setPgl(temp)
 
         if(input === "q" || input === "Q")
         {
@@ -60,7 +62,7 @@ const GithubFollowing = () => {
                     {feeds.slice((pg-1)*10,(pg*10)).map((x, index) => {
                         return x
                     })}
-                    <Text>Page : {pg}</Text>
+					<Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
                 </Box>
             </>
         );

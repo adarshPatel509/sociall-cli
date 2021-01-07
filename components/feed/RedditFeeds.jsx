@@ -9,6 +9,7 @@ const RedditFeeds = () => {
 	const [isLoading, setLoading] = useState(true);
 	const [feeds, setFeeds] = useState([]);
 	const [pg, setPg] = useState(1);
+	const [pgl, setPgl] = useState(1)
 
 	useEffect(() => {
 		reddit
@@ -68,6 +69,9 @@ const RedditFeeds = () => {
 				? parseInt(feeds.length / 5) + 1
 				: parseInt(feeds.length / 5);
 
+		setPgl(temp)
+
+
 		if (input === "q" || input === "Q") {
 			process.exit();
 		} else if (key.upArrow) {
@@ -92,7 +96,7 @@ const RedditFeeds = () => {
 					{feeds.slice((pg - 1) * 5, pg * 5).map((x, index) => {
 						return x;
 					})}
-					<Text>Page : {pg}</Text>
+					<Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
 				</Box>
 			</>
 		);
@@ -185,16 +189,16 @@ const LikeComment = (props) => {
 					</Tab>
 				</Tabs>
 			) : (
-				<Text>
-					{"\uD83D\uDD3C"} : {props.ups} {"\uD83D\uDD3D"} : {props.downs}{" "}
-					{"\uD83C\uDFC6"} : {props.tar} {"\uD83D\uDCAC"} : {props.nc}
-				</Text>
-			)}
+					<Text>
+						{"\uD83D\uDD3C"} : {props.ups} {"\uD83D\uDD3D"} : {props.downs}{" "}
+						{"\uD83C\uDFC6"} : {props.tar} {"\uD83D\uDCAC"} : {props.nc}
+					</Text>
+				)}
 			{isFocused && activeTab === "num_comments" && btnPressed ? (
 				<CommentBox setBtnPressed={SetBtnPressed} id={props.id} />
 			) : (
-				<></>
-			)}
+					<></>
+				)}
 		</>
 	);
 };

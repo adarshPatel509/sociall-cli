@@ -6,12 +6,13 @@ import Loader from "../../utils/loader";
 import { twit } from "../../utils/api-clients";
 
 /**
-    Fetch Latest Twitter Feeds
+	Fetch Latest Twitter Feeds
  */
 const TwitterFeeds = () => {
 	const [isLoading, setLoading] = useState(true);
 	const [feeds, setFeeds] = useState([]);
 	const [pg, setPg] = useState(1);
+	const [pgl, setPgl] = useState(1)
 
 	useEffect(() => {
 		twit
@@ -76,6 +77,8 @@ const TwitterFeeds = () => {
 				? parseInt(feeds.length / 5) + 1
 				: parseInt(feeds.length / 5);
 
+		setPgl(temp)
+
 		if (input === "q" || input === "Q") {
 			process.exit();
 		} else if (key.upArrow) {
@@ -100,7 +103,7 @@ const TwitterFeeds = () => {
 					{feeds.slice((pg - 1) * 5, pg * 5).map((x, index) => {
 						return x;
 					})}
-					<Text>Page : {pg}</Text>
+					<Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
 				</Box>
 			</>
 		);
@@ -159,11 +162,11 @@ const LikeRetweet = (props) => {
 					</Tab>
 				</Tabs>
 			) : (
-				<Text>
-					{props.rt ? "\uD83D\uDD01" : "\u25B6\uFE0F"} Retweet : {props.rtc}{" "}
-					{props.fv ? "\u2764\uFE0F" : "\uD83E\uDD0D"} Favorite : {props.fvc}
-				</Text>
-			)}
+					<Text>
+						{props.rt ? "\uD83D\uDD01" : "\u25B6\uFE0F"} Retweet : {props.rtc}{" "}
+						{props.fv ? "\u2764\uFE0F" : "\uD83E\uDD0D"} Favorite : {props.fvc}
+					</Text>
+				)}
 		</>
 	);
 };

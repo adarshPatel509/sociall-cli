@@ -24,7 +24,7 @@ const TwitterSearch = (props) => {
                         retweet_count,
                         favorite_count
                     } = res.data.statuses[i];
-                    var {name,screen_name} = user
+                    var { name, screen_name } = user
                     created_at = DateFormatter(created_at)
                     text = text.slice(0, text.search("https://") - 1)
                     if (truncated) {
@@ -49,6 +49,7 @@ const TwitterSearch = (props) => {
 
     useInput((input, key) => {
         const temp = feeds.length % 10 ? parseInt(feeds.length / 10) + 1 : parseInt(feeds.length / 10)
+        setPgl(temp)
 
         if (input === "q" || input === "Q") {
             process.exit()
@@ -71,7 +72,7 @@ const TwitterSearch = (props) => {
                     {feeds.slice((pg - 1) * 10, (pg * 10)).map((x, index) => {
                         return x
                     })}
-                    <Text>Page : {pg}</Text>
+                    <Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
                 </Box>
             </>
         );

@@ -11,6 +11,7 @@ const InstagramFeeds = () => {
 	const [isLoading, setLoading] = useState(true);
 	const [feeds, setFeeds] = useState({});
 	const [pg, setPg] = useState(1);
+	const [pgl, setPgl] = useState(1)
 
 	useEffect(() => {
 		(async () => {
@@ -24,15 +25,15 @@ const InstagramFeeds = () => {
 				var arr = [];
 				for (let i = 0; i < items.length; i++) {
 					var {
-							id,
-							taken_at,
-							code,
-							location,
-							user,
-							comment_count,
-							like_count,
-							caption,
-						} = items[i],
+						id,
+						taken_at,
+						code,
+						location,
+						user,
+						comment_count,
+						like_count,
+						caption,
+					} = items[i],
 						text = "",
 						loc_name = "";
 					var { username, full_name } = user;
@@ -91,6 +92,9 @@ const InstagramFeeds = () => {
 				? parseInt(feeds.length / 5) + 1
 				: parseInt(feeds.length / 5);
 
+		setPgl(temp)
+
+
 		if (input === "q" || input === "Q") {
 			process.exit();
 		} else if (key.upArrow) {
@@ -117,7 +121,7 @@ const InstagramFeeds = () => {
 						{feeds.slice((pg - 1) * 5, pg * 5).map((x, index) => {
 							return x;
 						})}
-						<Text>Page : {pg}</Text>
+						<Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
 					</Box>
 				}
 			</>
@@ -194,15 +198,15 @@ const LikeComment = (props) => {
 					</Tab>
 				</Tabs>
 			) : (
-				<Text>
-					{"\u2764\uFE0F"} : {props.lc} {"\uD83D\uDCAC"} : {props.cc}
-				</Text>
-			)}
+					<Text>
+						{"\u2764\uFE0F"} : {props.lc} {"\uD83D\uDCAC"} : {props.cc}
+					</Text>
+				)}
 			{isFocused && activeTab === "comment_count" && btnPressed ? (
 				<CommentBox setBtnPressed={SetBtnPressed} id={props.id} />
 			) : (
-				<></>
-			)}
+					<></>
+				)}
 		</>
 	);
 };

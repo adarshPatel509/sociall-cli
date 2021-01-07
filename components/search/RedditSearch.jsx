@@ -8,16 +8,16 @@ import { reddit } from "../../utils/api-clients"
 const RedditSearch = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
-    const [pg,setPg] = useState(1)
+    const [pg, setPg] = useState(1)
 
     useEffect(() => {
-        reddit.get('/r/subreddit/search' ,{q:props.searchField})
+        reddit.get('/r/subreddit/search', { q: props.searchField })
             .then(res => {
                 var arr = []
                 for (let i = 0; i < res.data.children.length; i++) {
                     var {
                         subreddit,
-                        title,  
+                        title,
                         subreddit_name_prefixed,
                         downs,
                         ups,
@@ -26,8 +26,8 @@ const RedditSearch = (props) => {
                         created,
                         id,
                         permalink,
-                      } = res.data.children[i].data
-                      permalink = "https://www.reddit.com/" + permalink;
+                    } = res.data.children[i].data
+                    permalink = "https://www.reddit.com/" + permalink;
                     const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" width="90%" alignSelf="center">
                         <Text><Link url={permalink}><Text bold >{subreddit_name_prefixed}</Text> </Link></Text>
                         <Text>{title}</Text>
@@ -44,34 +44,32 @@ const RedditSearch = (props) => {
 
     }, []);
 
-    useInput((input,key) => {
-        const temp = feeds.length%10 ? parseInt(feeds.length/10)+1 : parseInt(feeds.length/10)
+    useInput((input, key) => {
+        const temp = feeds.length % 10 ? parseInt(feeds.length / 10) + 1 : parseInt(feeds.length / 10)
+        setPgl(temp)
 
-        if(input === "q" || input === "Q")
-        {
+        if (input === "q" || input === "Q") {
             process.exit()
         }
-        else if(key.leftArrow)
-        {
-            setPg(Math.max(1,pg-1))
+        else if (key.leftArrow) {
+            setPg(Math.max(1, pg - 1))
         }
-        else if(key.rightArrow)
-        {
-            setPg(Math.min(pg+1,temp))
+        else if (key.rightArrow) {
+            setPg(Math.min(pg + 1, temp))
         }
     })
 
     if (isLoading) {
-    return <Loader message=" Fetching Reddit feeds..." type="dots" />
+        return <Loader message=" Fetching Reddit feeds..." type="dots" />
     }
     else {
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignItems="center">
-                    {feeds.slice((pg-1)*10,(pg*10)).map((x, index) => {
+                    {feeds.slice((pg - 1) * 10, (pg * 10)).map((x, index) => {
                         return x
                     })}
-                    <Text>Page : {pg}</Text>
+                    <Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
                 </Box>
             </>
         );

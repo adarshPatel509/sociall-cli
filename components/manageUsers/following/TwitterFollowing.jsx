@@ -9,14 +9,15 @@ const fetch = require("node-fetch");
 const TwitterFollowing = () => {
     const [isLoading, setLoading] = useState(true);
     const [feeds, setFeeds] = useState([]);
-    const [pg,setPg] = useState(1)
+    const [pg, setPg] = useState(1)
+    const [pgl, setPgl] = useState(1)
 
     useEffect(() => {
         twit.get('friends/list')
             .then(res => {
-                var arr = [],user_data;
-                for (let i = 0; i < res.data.users.length; i++) {                    
-                    const name = res.data.users[i].name,screen_name = res.data.users[i].screen_name
+                var arr = [], user_data;
+                for (let i = 0; i < res.data.users.length; i++) {
+                    const name = res.data.users[i].name, screen_name = res.data.users[i].screen_name
                     const description = res.data.users[i].description
                     const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" width="90%" alignSelf="center">
                         <Text bold>{name}</Text>
@@ -34,20 +35,18 @@ const TwitterFollowing = () => {
 
     }, []);
 
-    useInput((input,key) => {
-        const temp = feeds.length%10 ? parseInt(feeds.length/10)+1 : parseInt(feeds.length/10)
+    useInput((input, key) => {
+        const temp = feeds.length % 10 ? parseInt(feeds.length / 10) + 1 : parseInt(feeds.length / 10)
+        setPgl(temp)
 
-        if(input === "q" || input === "Q")
-        {
+        if (input === "q" || input === "Q") {
             process.exit()
         }
-        else if(key.leftArrow)
-        {
-            setPg(Math.max(1,pg-1))
+        else if (key.leftArrow) {
+            setPg(Math.max(1, pg - 1))
         }
-        else if(key.rightArrow)
-        {
-            setPg(Math.min(pg+1,temp))
+        else if (key.rightArrow) {
+            setPg(Math.min(pg + 1, temp))
         }
     })
 
@@ -58,10 +57,10 @@ const TwitterFollowing = () => {
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">
-                    {feeds.slice((pg-1)*10,(pg*10)).map((x, index) => {
+                    {feeds.slice((pg - 1) * 10, (pg * 10)).map((x, index) => {
                         return x
                     })}
-                    <Text>Page : {pg}</Text>
+                    <Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
                 </Box>
             </>
         );

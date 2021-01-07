@@ -57,6 +57,7 @@ const InstagramSearch = (props) => {
 			feeds.length % 10
 				? parseInt(feeds.length / 10) + 1
 				: parseInt(feeds.length / 10);
+		setPgl(temp)
 
 		if (input === "q" || input === "Q") {
 			process.exit();
@@ -83,7 +84,7 @@ const InstagramSearch = (props) => {
 					{feeds.slice((pg - 1) * 10, pg * 10).map((x, index) => {
 						return x;
 					})}
-					<Text>Page : {pg}</Text>
+					<Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
 				</Box>
 			</>
 		);
