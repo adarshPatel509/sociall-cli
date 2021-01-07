@@ -7,8 +7,9 @@ import DateFormatter from "../../utils/date-formatter"
 
 const TwitterSearch = (props) => {
     const [isLoading, setLoading] = useState(true);
-    const [feeds, setFeeds] = useState([]);
+    const [searchResult, setFeeds] = useState([]);
     const [pg, setPg] = useState(1)
+    const [totalPageLength, setTotalPageLength] = useState(1)
 
     useEffect(() => {
         twit.get('search/tweets', { q: props.searchField })
@@ -38,6 +39,8 @@ const TwitterSearch = (props) => {
                     arr.push(ans)
                 }
                 setFeeds(arr)
+                const totalPages = Math.ceil(arr.length / 5);
+                setTotalPageLength(totalPages);
                 setLoading(false)
             })
             .catch(err => {
@@ -47,20 +50,15 @@ const TwitterSearch = (props) => {
     }, []);
 
 
-    useInput((input, key) => {
-        const temp = feeds.length % 10 ? parseInt(feeds.length / 10) + 1 : parseInt(feeds.length / 10)
-        setPgl(temp)
-
-        if (input === "q" || input === "Q") {
-            process.exit()
-        }
-        else if (key.leftArrow) {
-            setPg(Math.max(1, pg - 1))
-        }
-        else if (key.rightArrow) {
-            setPg(Math.min(pg + 1, temp))
-        }
-    })
+	useInput((input, key) => {
+		if (input === "q" || input === "Q") {
+			process.exit();
+		} else if (key.upArrow) {
+			setPg(Math.max(1, pg - 1));
+		} else if (key.downArrow) {
+			setPg(Math.min(pg + 1, totalPageLength));
+		}
+	});
 
     if (isLoading) {
         return <Loader message=" Fetching Twitter feeds..." type="dots" />
@@ -69,10 +67,10 @@ const TwitterSearch = (props) => {
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">
-                    {feeds.slice((pg - 1) * 10, (pg * 10)).map((x, index) => {
+                    {searchResult.slice((pg - 1) * 5, (pg * 5)).map((x, index) => {
                         return x
                     })}
-                    <Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
+                    <Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != totalPageLength && "\u25B6\uFE0F"}</Text>
                 </Box>
             </>
         );

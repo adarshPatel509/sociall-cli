@@ -12,7 +12,7 @@ const TwitterFeeds = () => {
 	const [isLoading, setLoading] = useState(true);
 	const [feeds, setFeeds] = useState([]);
 	const [pg, setPg] = useState(1);
-	const [pgl, setPgl] = useState(1)
+	const [totalPageLength, setTotalPageLength] = useState(1)
 
 	useEffect(() => {
 		twit
@@ -64,6 +64,8 @@ const TwitterFeeds = () => {
 					arr.push(ans);
 				}
 				setFeeds(arr);
+				const totalPages = Math.ceil(arr.length / 5);
+				setTotalPageLength(totalPages);
 				setLoading(false);
 			})
 			.catch((err) => {
@@ -71,20 +73,14 @@ const TwitterFeeds = () => {
 			});
 	}, []);
 
+
 	useInput((input, key) => {
-		const temp =
-			feeds.length % 5
-				? parseInt(feeds.length / 5) + 1
-				: parseInt(feeds.length / 5);
-
-		setPgl(temp)
-
 		if (input === "q" || input === "Q") {
 			process.exit();
 		} else if (key.upArrow) {
 			setPg(Math.max(1, pg - 1));
 		} else if (key.downArrow) {
-			setPg(Math.min(pg + 1, temp));
+			setPg(Math.min(pg + 1, totalPageLength));
 		}
 	});
 
@@ -103,7 +99,7 @@ const TwitterFeeds = () => {
 					{feeds.slice((pg - 1) * 5, pg * 5).map((x, index) => {
 						return x;
 					})}
-					<Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
+					<Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != totalPageLength && "\u25B6\uFE0F"}</Text>
 				</Box>
 			</>
 		);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, Box } from "ink";
+import { Text, Box, useFocus, useInput } from "ink";
 import Loader from "../../utils/loader";
 import { ig } from "../../utils/api-clients";
 import DateFormatter from "../../utils/date-formatter";
@@ -8,6 +8,8 @@ const config = require("../../config.json");
 const InstagramNotifications = () => {
 	const [isLoading, setLoading] = useState(true);
 	const [notifications, setNotifications] = useState([]);
+	const [pg, setPg] = useState(1);
+	const [totalPageLength, setTotalPageLength] = useState(1)
 
 	useEffect(() => {
 		(async () => {
@@ -63,6 +65,9 @@ const InstagramNotifications = () => {
 							}
 						}
 						setNotifications(arr);
+						const totalPages = Math.ceil(arr.length / 5);
+						setTotalPageLength(totalPages);
+						setLoading(false);
 					})
 					.catch((err) => console.log(err));
 
@@ -72,6 +77,16 @@ const InstagramNotifications = () => {
 			}
 		})();
 	}, []);
+
+	useInput((input, key) => {
+		if (input === "q" || input === "Q") {
+			process.exit();
+		} else if (key.upArrow) {
+			setPg(Math.max(1, pg - 1));
+		} else if (key.downArrow) {
+			setPg(Math.min(pg + 1, totalPageLength));
+		}
+	});
 
 	if (isLoading) {
 		return <Loader message=" Fetching Notifications..." type="dots" />;
@@ -84,9 +99,10 @@ const InstagramNotifications = () => {
 				width="95%"
 				alignItems="center"
 			>
-				{notifications.map((x, index) => {
+				{notifications.slice((pg - 1) * 5, pg * 5).map((x, index) => {
 					return x;
 				})}
+				<Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != totalPageLength && "\u25B6\uFE0F"}</Text>
 			</Box>
 		);
 	}
