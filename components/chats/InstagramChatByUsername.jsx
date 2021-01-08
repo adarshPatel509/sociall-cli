@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Text, Box, useInput } from "ink";
 import Loader from "../../utils/loader";
 import { ig } from "../../utils/api-clients";
-import DateFormatter from "../../utils/date-formatter";
 const config = require("../../config.json");
 import moment from "moment"
 
@@ -10,6 +9,7 @@ const InstagramChatByUsername = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [chats, setChats] = useState([]);
     const [pg, setPg] = useState(1);
+    const [totalPageLength, setTotalPageLength] = useState(1)
     const [errMsg, setErrMsg] = useState(false)
 
     useEffect(() => {
@@ -75,6 +75,8 @@ const InstagramChatByUsername = (props) => {
 
                 }
                 setChats(final_arr)
+                const totalPages = Math.ceil(final_arr.length / 5);
+                setTotalPageLength(totalPages);
                 setLoading(false);
             }
             catch (e) {
@@ -91,16 +93,10 @@ const InstagramChatByUsername = (props) => {
     useInput((input, key) => {
         if (input === "q" || input === "Q") {
             process.exit();
-        }
-        const temp =
-            chats.length % 5
-                ? parseInt(chats.length / 5) + 1
-                : parseInt(chats.length / 5);
-
-        if (key.upArrow) {
+        } else if (key.upArrow) {
             setPg(Math.max(1, pg - 1));
         } else if (key.downArrow) {
-            setPg(Math.min(pg + 1, temp));
+            setPg(Math.min(pg + 1, totalPageLength));
         }
     });
 
@@ -129,7 +125,7 @@ const InstagramChatByUsername = (props) => {
                 {chats.slice((pg - 1) * 5, pg * 5).map((x, index) => {
                     return x;
                 })}
-                <Text>Page : {pg}</Text>
+                <Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != totalPageLength && "\u25B6\uFE0F"}</Text>
             </Box>
         );
     }

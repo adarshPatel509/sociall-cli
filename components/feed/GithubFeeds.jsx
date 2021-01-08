@@ -59,7 +59,7 @@ const GithubFeeds = () => {
 					arr.push(ans);
 				}
 				setFeeds(arr);
-				const totalPages = Math.ceil(arr.length / 5);
+                const totalPages = arr.length % 5 ? parseInt(arr.length / 5) + 1 : parseInt(arr.length / 5)
 				setTotalPageLength(totalPages);
 				setLoading(false);
 			})

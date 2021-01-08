@@ -6,48 +6,51 @@ import { twit } from "../../../utils/api-clients"
 
 const TwitterFollowers = () => {
     const [isLoading, setLoading] = useState(true);
-    const [feeds, setFeeds] = useState([]);
-    const [pg, setPg] = useState(1)
-    const [pgl, setPgl] = useState(1)
+    const [followers, setFollowers] = useState([]);
+    const [pg, setPg] = useState(1);
+    const [totalPageLength, setTotalPageLength] = useState(1)
 
     useEffect(() => {
-        twit.get('followers/list')
-            .then(res => {
-                var arr = [], user_data;
-                for (let i = 0; i < res.data.users.length; i++) {
-                    const name = res.data.users[i].name, screen_name = res.data.users[i].screen_name
-                    const description = res.data.users[i].description
-                    const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" width="90%" alignSelf="center">
-                        <Text bold>{name}</Text>
-                        <Text dim>@{screen_name}</Text>
-                        <Text>{description}</Text>
-                    </Box>
-                    arr.push(ans)
-                }
-                setFeeds(arr)
+        (async () => {
+            try {
+                let arr = [], cursor = -1
+                do {
+                    const res = await twit.get('followers/list', {
+                        cursor: cursor
+                    })
+                    console.log(res.data.users.length);
+                    for (let i = 0; i < res.data.users.length; i++) {
+                        const name = res.data.users[i].name, screen_name = res.data.users[i].screen_name
+                        const description = res.data.users[i].description
+                        const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" width="90%" alignSelf="center">
+                            <Text bold>{arr.length + 1}. {name}</Text>
+                            <Text dim>@{screen_name}</Text>
+                            <Text>{description}</Text>
+                        </Box>
+                        arr.push(ans)
+                    }
+                    cursor = res.data.next_cursor
+                } while (cursor != 0);
+                setFollowers(arr)
+                const totalPages = Math.ceil(arr.length / 5);
+                setTotalPageLength(totalPages);
                 setLoading(false)
-            })
-            .catch(err => {
-                console.log(err);
-            })
-
+            } catch (error) {
+                console.error(error);
+            }
+        })()
     }, []);
 
     useInput((input, key) => {
-        const temp = feeds.length % 10 ? parseInt(feeds.length / 10) + 1 : parseInt(feeds.length / 10)
-        setPgl(temp)
-
         if (input === "q" || input === "Q") {
-            process.exit()
+            process.exit();
+        } else if (key.upArrow) {
+            setPg(Math.max(1, pg - 1));
+        } else if (key.downArrow) {
+            setPg(Math.min(pg + 1, totalPageLength));
         }
-        else if (key.leftArrow) {
-            setPg(Math.max(1, pg - 1))
-        }
-        else if (key.rightArrow) {
-            setPg(Math.min(pg + 1, temp))
-        }
+    });
 
-    })
 
     if (isLoading) {
         return <Loader message=" Fetching Twitter Followers ..." type="dots" />
@@ -56,10 +59,10 @@ const TwitterFollowers = () => {
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">
-                    {feeds.slice((pg - 1) * 10, (pg * 10)).map((x, index) => {
-                        return x
+                    {followers.slice((pg - 1) * 5, pg * 5).map((x, index) => {
+                        return x;
                     })}
-                    <Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
+                    <Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != totalPageLength && "\u25B6\uFE0F"}</Text>
                 </Box>
             </>
         );

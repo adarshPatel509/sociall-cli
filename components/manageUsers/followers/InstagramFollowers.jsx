@@ -7,9 +7,10 @@ const config = require("../../../config.json")
 
 const InstagramFollowers = () => {
     const [isLoading, setLoading] = useState(true);
-    const [feeds, setFeeds] = useState([]);
-    const [pg, setPg] = useState(1)
-    const [pgl, setPgl] = useState(1)
+    const [followers, setFollowers] = useState([]);
+    const [pg, setPg] = useState(1);
+    const [totalPageLength, setTotalPageLength] = useState(1)
+
 
     useEffect(() => {
         (async () => {
@@ -28,7 +29,9 @@ const InstagramFollowers = () => {
                     </Box>
                     arr.push(ans)
                 }
-                setFeeds(arr)
+                setFollowers(arr)
+                const totalPages = Math.ceil(arr.length / 5);
+                setTotalPageLength(totalPages);
                 setLoading(false)
             } catch (e) {
                 console.log(e)
@@ -38,19 +41,14 @@ const InstagramFollowers = () => {
 
 
     useInput((input, key) => {
-        const temp = feeds.length % 10 ? parseInt(feeds.length / 10) + 1 : parseInt(feeds.length / 10)
-        setPgl(temp)
-
         if (input === "q" || input === "Q") {
-            process.exit()
+            process.exit();
+        } else if (key.upArrow) {
+            setPg(Math.max(1, pg - 1));
+        } else if (key.downArrow) {
+            setPg(Math.min(pg + 1, totalPageLength));
         }
-        else if (key.leftArrow) {
-            setPg(Math.max(1, pg - 1))
-        }
-        else if (key.rightArrow) {
-            setPg(Math.min(pg + 1, temp))
-        }
-    })
+    });
 
 
 
@@ -61,10 +59,10 @@ const InstagramFollowers = () => {
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">
-                    {feeds.slice((pg - 1) * 10, (pg * 10)).map((x, index) => {
-                        return x
+                    {followers.slice((pg - 1) * 5, pg * 5).map((x, index) => {
+                        return x;
                     })}
-                    <Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
+                    <Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != totalPageLength && "\u25B6\uFE0F"}</Text>
                 </Box>
             </>
         );

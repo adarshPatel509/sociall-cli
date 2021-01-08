@@ -6,12 +6,13 @@ import DateFormatter from "../../utils/date-formatter"
 
 const RedditChatByUsername = (props) => {
     const [isLoading, setLoading] = useState(true);
-    const [notifications, setNotifications] = useState({});
+    const [chats, setChats] = useState({});
 
+    
     useEffect(() => {
         reddit.get('/api/read_all_messages')
             .then(res => {
-                setNotifications(res);
+                setChats(res);
                 setLoading(false);
 
             })
@@ -27,7 +28,7 @@ const RedditChatByUsername = (props) => {
     else {
         console.log(notifications);
         return <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignItems="center">
-            {/* {notifications.map((x, index) => {
+            {/* {chats.map((x, index) => {
                 return x
             })} */}
         </Box>

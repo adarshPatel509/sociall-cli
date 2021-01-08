@@ -20,5 +20,12 @@
         "app-secret": "",
         "access-token": "",
         "app-token": ""
+    },
+    "reddit": {
+        "username": "",
+        "password": "",
+        "appId": "",
+        "appSecret": "",
+        "userAgent": ""
     }
 }

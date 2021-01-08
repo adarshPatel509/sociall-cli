@@ -7,53 +7,47 @@ const config = require("../../../config.json")
 
 const InstagramFollowers = () => {
     const [isLoading, setLoading] = useState(true);
-    const [feeds, setFeeds] = useState([]);
-    const [pg,setPg] = useState(1)
-	const [pgl, setPgl] = useState(1)
+    const [following, setFollowing] = useState([]);
+    const [pg, setPg] = useState(1);
+    const [totalPageLength, setTotalPageLength] = useState(1)
 
-    useEffect( () => {
+    useEffect(() => {
         (async () => {
             try {
                 const auth = await ig.account.login(config['instagram']['username'], config['instagram']['password']);
                 const following = ig.feed.accountFollowing(auth.pk);
                 const items = await following.items();
                 var arr = []
-                for(let i = 0;i<items.length;i++)
-                {
-                    const username = items[i].username,full_name=items[i].full_name
-                    const url="https://www.instagram.com/"+username+"/"
+                for (let i = 0; i < items.length; i++) {
+                    const username = items[i].username, full_name = items[i].full_name
+                    const url = "https://www.instagram.com/" + username + "/"
 
-                      const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" width="90%" alignSelf="center">
-                            <Text bold>{arr.length +1}. <Link url={url} >{username}</Link></Text>
-                            <Text>{full_name}</Text>
-                        </Box>
-                  arr.push(ans)
+                    const ans = <Box key={arr.length} borderStyle="round" borderColor="red" paddingLeft={2} flexDirection="column" width="90%" alignSelf="center">
+                        <Text bold>{arr.length + 1}. <Link url={url} >{username}</Link></Text>
+                        <Text>{full_name}</Text>
+                    </Box>
+                    arr.push(ans)
                 }
-                setFeeds(arr)
+                setFollowing(arr)
+                const totalPages = Math.ceil(arr.length / 5);
+                setTotalPageLength(totalPages);
                 setLoading(false)
-            } catch(e) {
+            } catch (e) {
                 console.log(e)
             }
         })();
     }, []);
 
-    useInput((input,key) => {
-        const temp = feeds.length%10 ? parseInt(feeds.length/10)+1 : parseInt(feeds.length/10)
-		setPgl(temp)
+    useInput((input, key) => {
+        if (input === "q" || input === "Q") {
+            process.exit();
+        } else if (key.upArrow) {
+            setPg(Math.max(1, pg - 1));
+        } else if (key.downArrow) {
+            setPg(Math.min(pg + 1, totalPageLength));
+        }
+    });
 
-        if(input === "q" || input === "Q")
-        {
-            process.exit()
-        }
-        else if(key.leftArrow)
-        {
-            setPg(Math.max(1,pg-1))
-        }
-        else if(key.rightArrow)
-        {
-            setPg(Math.min(pg+1,temp))
-        }
-    })
 
 
     if (isLoading) {
@@ -63,10 +57,10 @@ const InstagramFollowers = () => {
         return (
             <>
                 <Box borderStyle="round" borderColor="#00FFFF" flexDirection="column" width="95%" alignSelf="center" alignItems="center">
-                    {feeds.slice((pg-1)*10,(pg*10)).map((x, index) => {
-                        return x
+                    {following.slice((pg - 1) * 5, pg * 5).map((x, index) => {
+                        return x;
                     })}
-					<Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != pgl && "\u25B6\uFE0F"}</Text>
+                    <Text>{pg != 1 && "\u25C0\uFE0F"}  Page : {pg} {pg != totalPageLength && "\u25B6\uFE0F"}</Text>
                 </Box>
             </>
         );
