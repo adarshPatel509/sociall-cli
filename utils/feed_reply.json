@@ -1,0 +1,71 @@
+{
+    "CommitCommentEvent": {
+        "emoji": "\uD83D\uDCAC",
+        "reply": "has \uD83D\uDCAC commented on commit of"
+    },
+    "CreateEvent": {
+        "emoji": "\uD83D\uDD28",
+        "reply": "has \uD83D\uDD28 created"
+    },
+    "DeleteEvent": {
+        "emoji": "\u274C",
+        "reply": "has \u274C deleted"
+    },
+    "ForkEvent": {
+        "emoji": "\uD83D\uDCCC",
+        "reply": "has \uD83D\uDCCC forked"
+    },
+    "GollumEvent": {
+        "emoji": "\uD83D\uDCDA",
+        "reply": "has update \uD83D\uDCDA wiki page"
+    },
+    "IssueCommentEvent": {
+        "emoji": "\uD83D\uDCAC",
+        "reply": "has \uD83D\uDCAC commented on Issue of"
+    },
+    "IssuesEvent": {
+        "emoji": "\u2699\uFE0F",
+        "reply": "has generated \u2699\uFE0F issue for"
+    },
+    "MemberEvent": {
+        "emoji": "\uD83E\uDDCD",
+        "reply": "has become \uD83E\uDDCD collaborator of"
+    },
+    "PublicEvent": {
+        "emoji": "\uD83D\uDCE2",
+        "reply": "has made his repo \uD83D\uDCE2 public"
+    },
+    "PullRequestEvent": {
+        "emoji": "\uD83D\uDCD6",
+        "reply": "has generated a \uD83D\uDCD6 pull request for repo"
+    },
+    "PullRequestReviewCommentEvent": {
+        "emoji": "\uD83D\uDC41\uFE0F",
+        "reply": "has \uD83D\uDC41\uFE0F reviwed the pr of"
+    },
+    "PushEvent": {
+        "emoji": "\uD83D\uDE80",
+        "reply": "has \uD83D\uDE80 pushed code to"
+    },
+    "ReleaseEvent": {
+        "emoji": "\uD83D\uDCC6",
+        "reply": "has \uD83D\uDCC6 released data about"
+    },
+    "SponsorshipEvent": {
+        "emoji": "\uD83D\uDCB8",
+        "reply": "has recieved sponsorship for repo"
+    },
+    "WatchEvent": {
+        "emoji": "\u2B50",
+        "reply": "has \u2B50 starred repo "
+    },
+    "Issue": {
+        "emoji": "\u2699\uFE0F"
+    },
+    "PullRequest": {
+        "emoji": "\uD83D\uDCD6"
+    },
+    "RepositoryVulnerabilityAlert": {
+        "emoji": "\u26A0\uFE0F"
+    }
+}

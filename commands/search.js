@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Text, Box } from "ink";
 import SelectInput from "ink-select-input";
-import GithubNotifications from "../components/notification/GithubNotifications";
-import TwitterNotifications from "../components/notification/TwitterNotifications";
-import InstagramNotifications from "../components/notification/InstagramNotifications";
-import RedditNotifications from "../components/notification/RedditNotifications";
+import TwitterSearch from "../components/search/TwitterSearch";
+import { GithubSelect } from "../components/search/GithubSearch";
+import InstagramSearch from "../components/search/InstagramSearch";
+import RedditSearch from "../components/search/RedditSearch";
 
-/// Get Latest Notification command
-const Notifications = ({ platform = "" }) => {
+/// Get Search Result Commands
+const Search = ({ platform = "", searchField }) => {
 	if (platform.includes("github")) {
-		return <GithubNotifications />;
+		return <GithubSelect searchField={searchField} />;
 	} else if (platform.includes("twitter")) {
-		return <TwitterNotifications />;
+		return <TwitterSearch searchField={searchField} />;
 	} else if (platform.includes("instagram")) {
-		return <InstagramNotifications />;
+		return <InstagramSearch searchField={searchField} />;
 	} else if (platform.includes("reddit")) {
-		return <RedditNotifications />;
+		return <RedditSearch searchField={searchField} />;
 	} else {
 		const [updateField, setField] = useState("");
 		const items = [
@@ -40,35 +40,37 @@ const Notifications = ({ platform = "" }) => {
 						width={51}
 						borderColor="#00FFFF"
 					>
-						<Text color="yellow">
-							Select the Social Media to see Notifications :{" "}
-						</Text>
+						<Text color="yellow">Select the Social Media to see feed : </Text>
 					</Box>
 					<SelectInput items={items} onSelect={handleSelect} />
 				</>
 			);
 		} else {
 			if (updateField == "github") {
-				return <GithubNotifications />;
+				return <GithubSelect searchField={searchField} />;
 			} else if (updateField == "instagram") {
-				return <InstagramNotifications />;
+				return <InstagramSearch searchField={searchField} />;
 			} else if (updateField == "twitter") {
-				return <TwitterNotifications />;
-			} else if (updateField == "reddit") {
-				return <RedditNotifications />;
+				return <TwitterSearch searchField={searchField} />;
+			}
+			else if (updateField == "reddit") {
+				return <RedditSearch searchField={searchField} />;
 			}
 		}
 	}
 	return <Text>Hello, {platform} </Text>;
 };
 
-Notifications.propTypes = {
-	/// Name of the Platform to fetch Notifications
+Search.propTypes = {
+	/// Name of the Platform to fetch search result
 	platform: PropTypes.string,
+	/// Text to fetch search result of
+	searchField: PropTypes.string.isRequired,
 };
 
-Notifications.shortFlags = {
+Search.shortFlags = {
 	platform: "p",
+	searchField: "s",
 };
 
-export default Notifications;
+export default Search;

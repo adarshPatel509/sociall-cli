@@ -1,13 +1,12 @@
 import { Octokit } from "@octokit/core";
 import Twit from 'twit';
-import Instagram from 'instagram-web-api';
-import { Facebook, FacebookApiException } from 'fb';
-
+import { Facebook } from 'fb';
+import Reddit from "reddit"
+import { IgApiClient } from 'instagram-private-api'
 /**
     Get config object
  */
 const config = require('../config.json');
-
 /**
     Github api client
  */
@@ -17,21 +16,20 @@ const octokit = new Octokit({ auth: config['github']['access-token'] });
     Twitter api client
  */
 const twit = new Twit({
-    consumer_key:         config['twitter']['api-key'],
-    consumer_secret:      config['twitter']['api-secret-key'],
-    access_token:         config['twitter']['my-token']['access-token'],
-    access_token_secret:  config['twitter']['my-token']['access-token-secret'],
-    timeout_ms:           60*1000,
-    strictSSL:            true,  
+    consumer_key: config['twitter']['api-key'],
+    consumer_secret: config['twitter']['api-secret-key'],
+    access_token: config['twitter']['my-token']['access-token'],
+    access_token_secret: config['twitter']['my-token']['access-token-secret'],
+    timeout_ms: 60 * 1000,
+    strictSSL: true,
 });
 
 /**
     Instagram api client
  */
-const ig = new Instagram({
-    username: config['instagram']['username'],
-    password: config['instagram']['password']
-});
+const ig = new IgApiClient()
+ig.state.generateDevice(config['instagram']['username']);
+
 
 /**
     Facebook api client
@@ -42,4 +40,12 @@ const fb = new Facebook({
     accessToken: config['facebook']['access-token']
 });
 
-export {octokit, twit, ig, fb};
+const reddit = new Reddit({
+    username: config['reddit']['username'],
+    password: config['reddit']['password'],
+    appId: config['reddit']['appId'],
+    appSecret: config['reddit']['appSecret'],
+    userAgent: config['reddit']['userAgent']
+})
+
+export { octokit, twit, ig, fb, reddit };
